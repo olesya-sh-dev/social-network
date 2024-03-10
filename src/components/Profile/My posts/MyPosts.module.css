@@ -1,0 +1,16 @@
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.newPost {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+}
+
+.newPost button {
+  width: 100px;
+  background-color: rgb(251, 63, 92);
+}

@@ -1,0 +1,14 @@
+.navbar {
+  height: 100vh;
+  grid-area: navbar;
+  background-color: rgb(254, 197, 206);
+  ul {
+    list-style: none;
+  }
+}
+
+.item {
+  color: rgb(251, 63, 92);
+  font-size: large;
+  font-weight: bold;
+}

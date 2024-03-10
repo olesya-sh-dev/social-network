@@ -1,0 +1,15 @@
+.block {
+  display: flex;
+  gap: 50px;
+}
+
+.block img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.description {
+  display: flex;
+  flex-direction: column;
+}
