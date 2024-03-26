@@ -1,1 +1,31 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  gap: 2px;
+}
 
+.dialogsItems {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  background-color: rgb(251, 63, 92);
+  min-height: 100vh;
+}
+.item {
+  text-decoration: none;
+  color: rgb(249, 250, 255);
+  font-size: 25px;
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(254, 197, 206);
+  height: 100vh;
+  padding: 20px;
+}
+
+.messageItem {
+  color: rgb(14, 14, 195);
+  font-size: 20px;
+}
