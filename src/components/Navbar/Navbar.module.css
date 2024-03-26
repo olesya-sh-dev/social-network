@@ -1,4 +1,8 @@
 .navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
   height: 100vh;
   grid-area: navbar;
   background-color: rgb(254, 197, 206);
@@ -11,4 +15,12 @@
   color: rgb(251, 63, 92);
   font-size: large;
   font-weight: bold;
+  text-decoration: none;
+}
+
+.active {
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(14, 14, 195);
 }
