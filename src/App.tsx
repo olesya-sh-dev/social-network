@@ -10,7 +10,7 @@ function App({ state }: any) {
   return (
     <div className="app-wrapper">
       <Header />
-      <Navbar />
+      <Navbar friends={state.sidebar.friends} />
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/" element={<Navigate to="/profile" />} />

@@ -10,7 +10,7 @@ import { DialogsPropsType } from "../redux/state";
 // };
 export const Dialogs = ({ dialogs, messages }: DialogsPropsType) => {
   let dialogsElements = dialogs.map((el) => (
-    <DialogItem name={el.name} id={el.id} />
+    <DialogItem name={el.name} id={el.id} img={el.img} />
   ));
   let messagesElements = messages.map((el) => (
     <Message message={el.message} id={el.id} />

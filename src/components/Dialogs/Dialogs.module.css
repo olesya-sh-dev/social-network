@@ -13,18 +13,35 @@
   min-height: 100vh;
 }
 .item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   text-decoration: none;
   color: rgb(249, 250, 255);
   font-size: 25px;
+  gap: 5px;
+}
+.item img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
 }
 .messages {
+  list-style: none;
+
   display: flex;
   flex-direction: column;
   background-color: rgb(254, 197, 206);
   height: 100vh;
-  padding: 20px;
-}
 
+  padding: 20px 100px 20px 100px;
+  :nth-child(odd) {
+    align-self: flex-end;
+    color: brown;
+    background-color: rgb(249, 250, 255);
+    width: 150px;
+  }
+}
 .messageItem {
   color: rgb(14, 14, 195);
   font-size: 20px;

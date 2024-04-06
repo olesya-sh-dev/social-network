@@ -1,7 +1,9 @@
 import React from "react";
 import s from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
-export const Navbar = () => {
+import { Friends } from "./Friends";
+import { SidebarPropsType } from "../redux/state";
+export const Navbar = ({ friends }: SidebarPropsType) => {
   return (
     <nav className={s.navbar}>
       <NavLink
@@ -34,6 +36,10 @@ export const Navbar = () => {
       >
         Settings
       </NavLink>
+
+      <div>
+        <Friends friends={friends} />
+      </div>
     </nav>
   );
 };
