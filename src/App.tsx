@@ -6,7 +6,7 @@ import { Profile } from "./components/Profile/Profile";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-function App({ state }: any) {
+function App({ state, addPost }: any) {
   return (
     <div className="app-wrapper">
       <Header />

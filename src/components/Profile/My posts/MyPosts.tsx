@@ -1,6 +1,7 @@
 import { Post } from "./Post/Post";
 import s from "./MyPosts.module.css";
 import { MyPostsPropsType } from "../../redux/state";
+import { AddNewItem } from "../../AddNewItem";
 
 export const MyPosts = ({ postData }: MyPostsPropsType) => {
   let postsElements = postData.map((p) => (
@@ -9,10 +10,11 @@ export const MyPosts = ({ postData }: MyPostsPropsType) => {
   return (
     <div>
       My posts
-      <div className={s.newPost}>
+      <AddNewItem className={s.newPost} />
+      {/* <div className={s.newPost}>
         <textarea></textarea>
         <button>add post</button>
-      </div>
+      </div> */}
       <div className={s.posts}>{postsElements}</div>
     </div>
   );

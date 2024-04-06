@@ -1,8 +1,10 @@
 import React from "react";
 import s from "./Dialogs.module.css";
+
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogsPropsType } from "../redux/state";
+import { AddNewItem } from "../AddNewItem";
 
 // type DialogsPropsType = {
 //   dialogs: DialogItemPropsType[];
@@ -18,7 +20,10 @@ export const Dialogs = ({ dialogs, messages }: DialogsPropsType) => {
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
-      <div className={s.messages}>{messagesElements}</div>
+      <div className={s.messages}>
+        {messagesElements}
+        <AddNewItem className={s.newMessage} />
+      </div>
     </div>
   );
 };
