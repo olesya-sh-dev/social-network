@@ -42,6 +42,7 @@ export type StateType = {
 };
 
 export const addPost = (newPostText: string) => {
+  debugger;
   let newPost: PostPropsType = {
     id: 3,
     message: newPostText,

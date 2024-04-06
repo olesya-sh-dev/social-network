@@ -16,7 +16,9 @@ function App({ state, addPost }: any) {
           <Route path="/" element={<Navigate to="/profile" />} />
           <Route
             path="/profile"
-            element={<Profile postData={state.profilePage.posts} />}
+            element={
+              <Profile postData={state.profilePage.posts} addPost={addPost} />
+            }
           />
           <Route
             path="/dialogs"

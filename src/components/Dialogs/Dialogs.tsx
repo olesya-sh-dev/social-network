@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css";
 
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import { DialogsPropsType } from "../redux/state";
+import { DialogsPropsType, addPost } from "../redux/state";
 import { AddNewItem } from "../AddNewItem";
 
 // type DialogsPropsType = {
@@ -22,7 +22,7 @@ export const Dialogs = ({ dialogs, messages }: DialogsPropsType) => {
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>
         {messagesElements}
-        <AddNewItem className={s.newMessage} />
+        <AddNewItem className={s.newMessage} addPost={addPost} />
       </div>
     </div>
   );
