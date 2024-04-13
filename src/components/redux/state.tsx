@@ -1,14 +1,21 @@
+let rerenderEntireTree = () => {
+  console.log("state changed");
+};
+
+
 export type PostPropsType = {
   id: number;
   message: string;
   likesCount: number;
 };
 export type MyPostsPropsType = {
-  postData: PostPropsType[];
+  postData: PostPropsType[] 
 };
 
 export type ProfilePropsType = {
   postData: PostPropsType[];
+  newPostText: string;
+
 };
 export type MessagePropsType = {
   id: string;
@@ -41,22 +48,15 @@ export type StateType = {
   };
 };
 
-export const addPost = (newPostText: string) => {
-  debugger;
-  let newPost: PostPropsType = {
-    id: 3,
-    message: newPostText,
-    likesCount: 0,
-  };
-  state.profilePage.posts.push(newPost);
-};
+
+
 export const state: StateType = {
   profilePage: {
     posts: [
       { id: 1, message: "Hi, how are you", likesCount: 15 },
       { id: 2, message: "It's my first post", likesCount: 20 },
     ],
-    newPostText: "",
+    newPostText: "+++",
   },
   dialogsPage: {
     dialogs: [
@@ -118,4 +118,26 @@ export const state: StateType = {
       },
     ],
   },
+};
+
+
+export const addPost = (newPostText: string) => {
+  let newPost: PostPropsType = {
+    id: 3,
+    message: newPostText,
+    likesCount: 0,
+  };
+  state.profilePage.posts = [...state.profilePage.posts, newPost];
+console.log(state.profilePage.posts);
+  console.log("hi!!!!");
+  rerenderEntireTree();
+};
+export const updateNewPostText = (text: string) => {
+  state.profilePage.newPostText = text;
+  console.log("hi");
+  rerenderEntireTree();
+};
+
+export const subscribe = (observer: () => void) => {
+  rerenderEntireTree = observer;
 };

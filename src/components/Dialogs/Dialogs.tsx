@@ -22,7 +22,7 @@ export const Dialogs = ({ dialogs, messages }: DialogsPropsType) => {
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>
         {messagesElements}
-        <AddNewItem className={s.newMessage} addPost={addPost} />
+        <AddNewItem className={s.newMessage} addPost={addPost} newPostText="" />
       </div>
     </div>
   );

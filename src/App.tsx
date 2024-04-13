@@ -6,7 +6,7 @@ import { Profile } from "./components/Profile/Profile";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-function App({ state, addPost }: any) {
+function App({ state, addPost, updateNewPostText }: any) {
   return (
     <div className="app-wrapper">
       <Header />
@@ -17,7 +17,7 @@ function App({ state, addPost }: any) {
           <Route
             path="/profile"
             element={
-              <Profile postData={state.profilePage.posts} addPost={addPost} />
+              <Profile postData={state.profilePage.posts} addPost={addPost} updateNewPostText={updateNewPostText} newPostText={state.profilePage.newPostText} />
             }
           />
           <Route
