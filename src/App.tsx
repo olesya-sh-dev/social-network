@@ -5,8 +5,16 @@ import { Navbar } from "./components/Navbar/Navbar";
 import { Profile } from "./components/Profile/Profile";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { StateType } from "./components/redux/state";
 
-function App({ state, addPost, updateNewPostText }: any) {
+interface AppPropsType {
+  state: StateType;
+  addPost: () => void;
+  updateNewPostText: (text: string) => void;
+  addNewMessage: () => void;
+  upDateNewMessageText: (text: string) => void;
+}
+function App({ state, addPost, updateNewPostText, addNewMessage, upDateNewMessageText }: AppPropsType) {
   return (
     <div className="app-wrapper">
       <Header />
@@ -26,6 +34,9 @@ function App({ state, addPost, updateNewPostText }: any) {
               <Dialogs
                 dialogs={state.dialogsPage.dialogs}
                 messages={state.dialogsPage.messages}
+                addNewMessage={addNewMessage}
+                upDateNewMessageText={upDateNewMessageText}
+                newMessageBody={state.dialogsPage.newMessageBody}
               />
             }
           />

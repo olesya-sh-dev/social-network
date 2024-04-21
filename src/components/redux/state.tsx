@@ -38,6 +38,7 @@ export type StateType = {
   dialogsPage: {
     dialogs: DialogItemPropsType[];
     messages: MessagePropsType[];
+    newMessageBody: string;
   };
   sidebar: {
     friends: DialogItemPropsType[];
@@ -92,6 +93,7 @@ export const store = {
         { id: "4", message: "Yo" },
         { id: "5", message: "Yo" },
       ],
+      newMessageBody: "+++",
     },
     sidebar: {
       friends: [
@@ -119,10 +121,6 @@ getState () {
   _callSubscriber() {
     console.log("state changed");
   },
-
- 
-  
-
   addPost() {
 
     let newPost: PostPropsType = {
@@ -133,28 +131,36 @@ getState () {
    
     this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
     console.log(this._state.profilePage.posts);
-    console.log("hi!!!!");
+  
     this._callSubscriber();
     this._state.profilePage.newPostText = "";
   },
 
-  updateNewPostText(text: string) {
+  upDateNewPostText(text: string) {
     this._state.profilePage.newPostText = text;
     console.log("hi");
     this._callSubscriber();
   },
 
-  addMessage(newMessage: string) {
-    let newMessageObj = {
+  addNewMessage() {
+  
+    let newMessageItem: MessagePropsType = {
       id: v1(),
-      message: newMessage,
+      message: this._state.dialogsPage.newMessageBody,
     };
     this._state.dialogsPage.messages = [
       ...this._state.dialogsPage.messages,
-      newMessageObj,
-    ];
+      newMessageItem];
+    this._callSubscriber();
+    this._state.dialogsPage.newMessageBody = "";
+  },
+  upDateNewMessageText(newText: string) {
+   
+    this._state.dialogsPage.newMessageBody = newText;
+ 
     this._callSubscriber();
   },
+  
   subscribe(observer: () => void) {
     this._callSubscriber = observer;
   },

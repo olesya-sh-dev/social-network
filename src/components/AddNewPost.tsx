@@ -6,9 +6,9 @@ type AddNewItemPropsType = {
   updateNewPostText?: (text: string) => void;
   newPostText: string;
 };
-export const AddNewItem = (props: AddNewItemPropsType) => {
+export const AddNewPost = (props: AddNewItemPropsType) => {
   //let newItem = useRef<HTMLTextAreaElement>(null);
- const [title, setTitle] = useState<string>(props.newPostText);
+  const [title, setTitle] = useState<string>(props.newPostText);
   // const addItemHandler = () => {
   //   if (newItem.current !== null) {
   //     props.updateNewPostText!(newItem.current.value);
@@ -18,21 +18,17 @@ export const AddNewItem = (props: AddNewItemPropsType) => {
   // };
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.currentTarget.value);
-         props.updateNewPostText!(e.currentTarget.value);
-    }
+    props.updateNewPostText!(e.currentTarget.value);
+  };
 
-const addItemHandler = () => {
-  props.addPost!(title);
-  setTitle("");
-};
+  const addItemHandler = () => {
+    props.addPost!(title);
+    setTitle("");
+  };
 
   return (
     <div className={props.className}>
-      <textarea
-        
-        value={title}
-        onChange={onChangeHandler}
-      ></textarea>
+      <textarea value={title} onChange={onChangeHandler}></textarea>
       <button onClick={addItemHandler}>ADD</button>
     </div>
   );
