@@ -12,14 +12,14 @@ interface AppPropsType {
   // addPost: () => void;
   // updateNewPostText: (text: string) => void;
   dispatch: (action: any) => void;
-  addNewMessage: () => void;
-  upDateNewMessageText: (text: string) => void;
+  // addNewMessage: () => void;
+  // upDateNewMessageText: (text: string) => void;
 }
 function App({
   state,
   dispatch,
-  addNewMessage,
-  upDateNewMessageText,
+  // addNewMessage,
+  // upDateNewMessageText,
 }: AppPropsType) {
   return (
     <div className="app-wrapper">
@@ -44,8 +44,7 @@ function App({
               <Dialogs
                 dialogs={state.dialogsPage.dialogs}
                 messages={state.dialogsPage.messages}
-                addNewMessage={addNewMessage}
-                upDateNewMessageText={upDateNewMessageText}
+                dispatch={dispatch}
                 newMessageBody={state.dialogsPage.newMessageBody}
               />
             }

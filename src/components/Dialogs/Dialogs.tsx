@@ -10,12 +10,15 @@ import { AddNewMessage } from "../AddNewMessage";
 export const Dialogs = ({
   dialogs,
   messages,
-  addNewMessage,
-  upDateNewMessageText,
+  dispatch,
   newMessageBody,
+  // addNewMessage,
+  // upDateNewMessageText,
+
 }: DialogsPropsType & {
-  addNewMessage: (text: string) => void;
-  upDateNewMessageText: (text: string) => void;
+  dispatch: (action: any) => void;
+  // addNewMessage: () => void;
+  // upDateNewMessageText: (text: string) => void;
   newMessageBody: string;
 }) => {
 
@@ -33,8 +36,9 @@ export const Dialogs = ({
         <AddNewMessage
         
           className={s.newMessage}
-          addNewMessage={addNewMessage}
-          upDateNewMessageText={upDateNewMessageText}
+          dispatch={dispatch}
+          // addNewMessage={addNewMessage}
+          // upDateNewMessageText={upDateNewMessageText}
           newMessageBody={newMessageBody}
         />
       </div>
