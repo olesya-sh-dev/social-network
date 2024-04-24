@@ -1,4 +1,4 @@
-import { SidebarPropsType } from "../redux/state";
+import { SidebarPropsType } from "../redux/store";
 import s from "./Navbar.module.css";
 export const Friends = ({ friends }: SidebarPropsType) => {
   return (

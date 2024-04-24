@@ -1,4 +1,4 @@
-import { log } from "console";
+
 import { ChangeEvent, useState } from "react";
 import { updateNewPostTextActionCreator } from "./redux/profile-reducer";
 import { addMessageActionCreator } from "./redux/dialogs-reducer";

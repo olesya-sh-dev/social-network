@@ -1,6 +1,6 @@
 import { Post } from "./Post/Post";
 import s from "./MyPosts.module.css";
-import { MyPostsPropsType } from "../../redux/state";
+import { MyPostsPropsType } from "../../redux/store";
 import { AddNewPost } from "../../AddNewPost";
 
 export const MyPosts = ({

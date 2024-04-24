@@ -5,7 +5,7 @@ import { Navbar } from "./components/Navbar/Navbar";
 import { Profile } from "./components/Profile/Profile";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { StateType } from "./components/redux/state";
+import { StateType } from "./components/redux/store";
 
 interface AppPropsType {
   state: StateType;
@@ -18,9 +18,9 @@ interface AppPropsType {
 function App({
   state,
   dispatch,
-  // addNewMessage,
-  // upDateNewMessageText,
-}: AppPropsType) {
+}: // addNewMessage,
+// upDateNewMessageText,
+AppPropsType) {
   return (
     <div className="app-wrapper">
       <Header />
