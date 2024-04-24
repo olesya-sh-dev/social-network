@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useRef, useState } from "react";
+import { addPostActionCreator } from "./redux/state";
 
 type AddNewItemPropsType = {
   className?: string;
@@ -23,7 +24,7 @@ export const AddNewPost = (props: AddNewItemPropsType) => {
   };
 
   const addItemHandler = () => {
-    props.dispatch({ type: "ADD-POST", newPostText: title }); //props.addPost!(title);
+    props.dispatch(addPostActionCreator(title)); //props.addPost!(title);
     setTitle("");
   };
 

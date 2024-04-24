@@ -1,7 +1,11 @@
 import { v1 } from "uuid";
 
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
+
 export type PostPropsType = {
-  id: number;
+  id: string;
   message: string;
   likesCount: number;
 };
@@ -48,8 +52,8 @@ export const store = {
   _state: {
     profilePage: {
       posts: [
-        { id: 1, message: "Hi, how are you", likesCount: 15 },
-        { id: 2, message: "It's my first post", likesCount: 20 },
+        { id: "1", message: "Hi, how are you", likesCount: 15 },
+        { id: "2", message: "It's my first post", likesCount: 20 },
       ],
       newPostText: "+++",
     },
@@ -115,7 +119,7 @@ export const store = {
       ],
     },
   },
-getState () {
+  getState() {
     return this._state;
   },
   _callSubscriber() {
@@ -128,10 +132,10 @@ getState () {
   //     message: this._state.profilePage.newPostText,
   //     likesCount: 0,
   //   };
-   
+
   //   this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
   //   console.log(this._state.profilePage.posts);
-  
+
   //   this._callSubscriber();
   //   this._state.profilePage.newPostText = "";
   // },
@@ -143,48 +147,48 @@ getState () {
   // },
 
   addNewMessage() {
-  
     let newMessageItem: MessagePropsType = {
       id: v1(),
       message: this._state.dialogsPage.newMessageBody,
     };
     this._state.dialogsPage.messages = [
       ...this._state.dialogsPage.messages,
-      newMessageItem];
+      newMessageItem,
+    ];
     this._callSubscriber();
     this._state.dialogsPage.newMessageBody = "";
   },
   upDateNewMessageText(newText: string) {
-   
     this._state.dialogsPage.newMessageBody = newText;
- 
+
     this._callSubscriber();
   },
-  
+
   dispatch(action: any) {
     console.log(action);
-    if (action.type === "ADD-POST") {
+    if (action.type === ADD_POST) {
       console.log("add");
       let newPost: PostPropsType = {
-        id: 3,
+        id: v1(),
         // message: this._state.profilePage.newPostText,
         message: action.newPostText,
         likesCount: 0,
       };
-     
-      this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
+
+      this._state.profilePage.posts = [
+        ...this._state.profilePage.posts,
+        newPost,
+      ];
       console.log(this._state.profilePage.posts);
-    
+
       this._callSubscriber();
       this._state.profilePage.newPostText = "";
-    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-      
-    this._state.profilePage.newPostText = action.newText;
-    console.log("textarea");
-    this._callSubscriber();
-  }
+    } else if (action.type === UPDATE_NEW_POST_TEXT) {
+      this._state.profilePage.newPostText = action.newText;
+      console.log("textarea");
+      this._callSubscriber();
+    }
   },
-
 
   subscribe(observer: () => void) {
     this._callSubscriber = observer;
@@ -192,3 +196,18 @@ getState () {
 };
 
 
+export const addPostActionCreator = (newPostText: string) => {
+  return {
+    type: ADD_POST,
+    newPostText,
+  };
+};
+// type addPostActionType = ReturnType<typeof addPostActionCreator>;
+export const updateNewPostTextActionCreator = (text: string) => {
+  return {
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+  };
+};
+
+//window.store = store;
