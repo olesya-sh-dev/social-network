@@ -121,26 +121,26 @@ getState () {
   _callSubscriber() {
     console.log("state changed");
   },
-  addPost() {
+  // addPost() {
 
-    let newPost: PostPropsType = {
-      id: 3,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0,
-    };
+  //   let newPost: PostPropsType = {
+  //     id: 3,
+  //     message: this._state.profilePage.newPostText,
+  //     likesCount: 0,
+  //   };
    
-    this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
-    console.log(this._state.profilePage.posts);
+  //   this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
+  //   console.log(this._state.profilePage.posts);
   
-    this._callSubscriber();
-    this._state.profilePage.newPostText = "";
-  },
+  //   this._callSubscriber();
+  //   this._state.profilePage.newPostText = "";
+  // },
 
-  upDateNewPostText(text: string) {
-    this._state.profilePage.newPostText = text;
-    console.log("hi");
-    this._callSubscriber();
-  },
+  // upDateNewPostText(text: string) {
+  //   this._state.profilePage.newPostText = text;
+  //   console.log("hi");
+  //   this._callSubscriber();
+  // },
 
   addNewMessage() {
   
@@ -161,6 +161,31 @@ getState () {
     this._callSubscriber();
   },
   
+  dispatch(action: any) {
+    console.log(action);
+    if (action.type === "ADD-POST") {
+      console.log("add");
+      let newPost: PostPropsType = {
+        id: 3,
+        // message: this._state.profilePage.newPostText,
+        message: action.newPostText,
+        likesCount: 0,
+      };
+     
+      this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
+      console.log(this._state.profilePage.posts);
+    
+      this._callSubscriber();
+      this._state.profilePage.newPostText = "";
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+      
+    this._state.profilePage.newPostText = action.newText;
+    console.log("textarea");
+    this._callSubscriber();
+  }
+  },
+
+
   subscribe(observer: () => void) {
     this._callSubscriber = observer;
   },

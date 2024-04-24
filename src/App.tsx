@@ -9,12 +9,18 @@ import { StateType } from "./components/redux/state";
 
 interface AppPropsType {
   state: StateType;
-  addPost: () => void;
-  updateNewPostText: (text: string) => void;
+  // addPost: () => void;
+  // updateNewPostText: (text: string) => void;
+  dispatch: (action: any) => void;
   addNewMessage: () => void;
   upDateNewMessageText: (text: string) => void;
 }
-function App({ state, addPost, updateNewPostText, addNewMessage, upDateNewMessageText }: AppPropsType) {
+function App({
+  state,
+  dispatch,
+  addNewMessage,
+  upDateNewMessageText,
+}: AppPropsType) {
   return (
     <div className="app-wrapper">
       <Header />
@@ -25,7 +31,11 @@ function App({ state, addPost, updateNewPostText, addNewMessage, upDateNewMessag
           <Route
             path="/profile"
             element={
-              <Profile postData={state.profilePage.posts} addPost={addPost} updateNewPostText={updateNewPostText} newPostText={state.profilePage.newPostText} />
+              <Profile
+                postData={state.profilePage.posts}
+                dispatch={dispatch}
+                newPostText={state.profilePage.newPostText}
+              />
             }
           />
           <Route

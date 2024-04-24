@@ -10,9 +10,10 @@ let rerenderEntireTree = () => {
     <BrowserRouter>
       <App
         state={store.getState()}
-        addPost={store.addPost.bind(store)}
-        upDateNewMessageText={store.upDateNewMessageText.bind(store)}
-        updateNewPostText={store.upDateNewPostText.bind(store)}
+        dispatch={store.dispatch.bind(store)}
+        // updateNewPostText={store.upDateNewPostText.bind(store)}
+         upDateNewMessageText={store.upDateNewMessageText.bind(store)}
+       
         addNewMessage={store.addNewMessage.bind(store)}
       />
     </BrowserRouter>,
@@ -22,3 +23,7 @@ let rerenderEntireTree = () => {
 
 rerenderEntireTree();
 store.subscribe(rerenderEntireTree);
+//  store.subscribe(()=> {
+//   let state = store.getState();
+//   rerenderEntireTree();
+//  })

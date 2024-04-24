@@ -5,12 +5,14 @@ import { AddNewPost } from "../../AddNewPost";
 
 export const MyPosts = ({
   postData,
-  addPost,
-  updateNewPostText,
+  dispatch,
+  // addPost,
+  // updateNewPostText,
   newPostText,
 }: MyPostsPropsType & {
-  addPost: (newPostText: string) => void;
-  updateNewPostText: (text: string) => void;
+  //addPost: (newPostText: string) => void;
+  //updateNewPostText: (text: string) => void;
+  dispatch: (action: any) => void;
   newPostText: string;
 }) => {
   let postsElements = postData.map((p, index) => (
@@ -21,8 +23,9 @@ export const MyPosts = ({
       My posts
       <AddNewPost
         className={s.newPost}
-        addPost={addPost}
-        updateNewPostText={updateNewPostText}
+        dispatch={dispatch}
+        // addPost={addPost}
+        // updateNewPostText={updateNewPostText}
         newPostText={newPostText}
       />
       {/* <div className={s.newPost}>

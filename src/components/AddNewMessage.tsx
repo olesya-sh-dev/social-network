@@ -15,6 +15,7 @@ export const AddNewMessage = (props: AddNewMessagePropsType) => {
   };
 
   const addMessageHandler = () => {
+    debugger
     props.addNewMessage!(message);
     setMessage("");
   };

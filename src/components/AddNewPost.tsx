@@ -2,8 +2,9 @@ import React, { ChangeEvent, useRef, useState } from "react";
 
 type AddNewItemPropsType = {
   className?: string;
-  addPost?: (newPostText: string) => void;
-  updateNewPostText?: (text: string) => void;
+  // addPost?: (newPostText: string) => void;
+  // updateNewPostText?: (text: string) => void;
+  dispatch: (action: any) => void;
   newPostText: string;
 };
 export const AddNewPost = (props: AddNewItemPropsType) => {
@@ -18,18 +19,20 @@ export const AddNewPost = (props: AddNewItemPropsType) => {
   // };
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.currentTarget.value);
-    props.updateNewPostText!(e.currentTarget.value);
+    props.dispatch({ type: "UPDATE-NEW-POST-TEXT", text: e.currentTarget.value }); //props.updateNewPostText!(e.currentTarget.value);
   };
 
   const addItemHandler = () => {
-    props.addPost!(title);
+    props.dispatch({ type: "ADD-POST", newPostText: title }); //props.addPost!(title);
     setTitle("");
   };
+
 
   return (
     <div className={props.className}>
       <textarea value={title} onChange={onChangeHandler}></textarea>
-      <button onClick={addItemHandler}>ADD</button>
+      <button onClick={addItemHandler}>ADD</button> 
+    
     </div>
   );
 };
