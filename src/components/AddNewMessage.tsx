@@ -1,6 +1,8 @@
 import { log } from "console";
 import { ChangeEvent, useState } from "react";
-import { addMessageActionCreator, updateNewPostTextActionCreator } from "./redux/state";
+import { updateNewPostTextActionCreator } from "./redux/profile-reducer";
+import { addMessageActionCreator } from "./redux/dialogs-reducer";
+
 
 type AddNewMessagePropsType = {
   className?: string;

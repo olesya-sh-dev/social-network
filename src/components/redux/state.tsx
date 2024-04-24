@@ -1,9 +1,8 @@
-import { v1 } from "uuid";
 
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+import { profileReducer } from "./profile-reducer";
+import { dialogsReducer } from "./dialogs-reducer";
+import { sidebarReducer } from "./sidebar-reducer";
+
 
 export type PostPropsType = {
   id: string;
@@ -11,13 +10,13 @@ export type PostPropsType = {
   likesCount: number;
 };
 export type MyPostsPropsType = {
-  postData: PostPropsType[];
+  posts: PostPropsType[];
 };
 
-export type ProfilePropsType = {
-  postData: PostPropsType[];
+export type ProfilePropsType = 
+  MyPostsPropsType & {
   newPostText: string;
-};
+}
 export type MessagePropsType = {
   id: string;
   message: string;
@@ -26,11 +25,12 @@ export type MessagePropsType = {
 export type DialogItemPropsType = {
   name: string;
   id: string;
-  img?: string;
+  img: string;
 };
 export type DialogsPropsType = {
   dialogs: DialogItemPropsType[];
   messages: MessagePropsType[];
+  newMessageBody: string;
 };
 export type SidebarPropsType = {
   friends: DialogItemPropsType[];
@@ -120,123 +120,28 @@ export const store = {
       ],
     },
   },
-  getState() {
-    return this._state;
-  },
+  
   _callSubscriber() {
     console.log("state changed");
   },
-  // addPost() {
-
-  //   let newPost: PostPropsType = {
-  //     id: 3,
-  //     message: this._state.profilePage.newPostText,
-  //     likesCount: 0,
-  //   };
-
-  //   this._state.profilePage.posts = [...this._state.profilePage.posts, newPost];
-  //   console.log(this._state.profilePage.posts);
-
-  //   this._callSubscriber();
-  //   this._state.profilePage.newPostText = "";
-  // },
-
-  // upDateNewPostText(text: string) {
-  //   this._state.profilePage.newPostText = text;
-  //   console.log("hi");
-  //   this._callSubscriber();
-  // },
-
-  // addNewMessage() {
-  //   let newMessageItem: MessagePropsType = {
-  //     id: v1(),
-  //     message: this._state.dialogsPage.newMessageBody,
-  //   };
-  //   this._state.dialogsPage.messages = [
-  //     ...this._state.dialogsPage.messages,
-  //     newMessageItem,
-  //   ];
-  //   this._callSubscriber();
-  //   this._state.dialogsPage.newMessageBody = "";
-  // },
-  // upDateNewMessageText(newText: string) {
-  //   this._state.dialogsPage.newMessageBody = newText;
-
-  //   this._callSubscriber();
-  // },
-
-  dispatch(action: any) {
-    console.log(action);
-    if (action.type === ADD_POST) {
-      console.log("add");
-      let newPost: PostPropsType = {
-        id: v1(),
-        // message: this._state.profilePage.newPostText,
-        message: action.newPostText,
-        likesCount: 0,
-      };
-
-      this._state.profilePage.posts = [
-        ...this._state.profilePage.posts,
-        newPost,
-      ];
-      console.log(this._state.profilePage.posts);
-
-      this._callSubscriber();
-      this._state.profilePage.newPostText = "";
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText;
-      console.log("textarea");
-      this._callSubscriber();
-    } else if (action.type === ADD_MESSAGE) {
-      let newMessageItem: MessagePropsType = {
-        id: v1(),
-        // message: this._state.dialogsPage.newMessageBody,
-        message: action.newMessageBody,
-      };
-      this._state.dialogsPage.messages = [
-        ...this._state.dialogsPage.messages,
-        newMessageItem,
-      ];
-      this._callSubscriber();
-      this._state.dialogsPage.newMessageBody = "";
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-      this._state.dialogsPage.newMessageBody = action.newText;
-
-      this._callSubscriber();
-    }
+  getState() {
+    return this._state;
   },
-
   subscribe(observer: () => void) {
     this._callSubscriber = observer;
   },
-};
 
-export const addPostActionCreator = (newPostText: string) => {
-  return {
-    type: ADD_POST,
-    newPostText,
-  };
-};
-// type addPostActionType = ReturnType<typeof addPostActionCreator>;
-export const updateNewPostTextActionCreator = (text: string) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-  };
-};
+  dispatch(action: any) {
 
-export const addMessageActionCreator = (newMessageBody: string) => {
-  return {
-    type: ADD_MESSAGE,
-    newMessageBody,
-  };
-};
-export const updateNewMessageTextActionCreator = (text: string) => {
-  return {
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text,
-  };
+   this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+    this._callSubscriber();
+
+    console.log(action);
+  },
+    
+ 
 };
 
 //window.store = store;

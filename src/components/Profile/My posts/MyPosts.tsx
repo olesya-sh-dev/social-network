@@ -4,7 +4,7 @@ import { MyPostsPropsType } from "../../redux/state";
 import { AddNewPost } from "../../AddNewPost";
 
 export const MyPosts = ({
-  postData,
+  posts,
   dispatch,
   // addPost,
   // updateNewPostText,
@@ -15,7 +15,7 @@ export const MyPosts = ({
   dispatch: (action: any) => void;
   newPostText: string;
 }) => {
-  let postsElements = postData.map((p, index) => (
+  let postsElements = posts.map((p, index) => (
     <Post key={index} id={p.id} message={p.message} likesCount={p.likesCount} />
   ));
   return (

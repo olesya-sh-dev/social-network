@@ -32,7 +32,7 @@ function App({
             path="/profile"
             element={
               <Profile
-                postData={state.profilePage.posts}
+                posts={state.profilePage.posts}
                 dispatch={dispatch}
                 newPostText={state.profilePage.newPostText}
               />

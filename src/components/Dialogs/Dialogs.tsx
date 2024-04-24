@@ -12,16 +12,10 @@ export const Dialogs = ({
   messages,
   dispatch,
   newMessageBody,
-  // addNewMessage,
-  // upDateNewMessageText,
-
 }: DialogsPropsType & {
   dispatch: (action: any) => void;
-  // addNewMessage: () => void;
-  // upDateNewMessageText: (text: string) => void;
   newMessageBody: string;
 }) => {
-
   let dialogsElements = dialogs.map((el, index) => (
     <DialogItem key={index} name={el.name} id={el.id} img={el.img} />
   ));
@@ -34,11 +28,8 @@ export const Dialogs = ({
       <div className={s.messages}>
         {messagesElements}
         <AddNewMessage
-        
           className={s.newMessage}
           dispatch={dispatch}
-          // addNewMessage={addNewMessage}
-          // upDateNewMessageText={upDateNewMessageText}
           newMessageBody={newMessageBody}
         />
       </div>
