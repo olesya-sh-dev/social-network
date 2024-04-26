@@ -2,6 +2,7 @@ import { Post } from "./Post/Post";
 import s from "./MyPosts.module.css";
 import { MyPostsPropsType } from "../../redux/store";
 import { AddNewPost } from "../../AddNewPost";
+import { ActionsProfileType } from "../../redux/profile-reducer";
 
 export const MyPosts = ({
   posts,
@@ -12,7 +13,7 @@ export const MyPosts = ({
 }: MyPostsPropsType & {
   //addPost: (newPostText: string) => void;
   //updateNewPostText: (text: string) => void;
-  dispatch: (action: any) => void;
+  dispatch: (action: ActionsProfileType) => void;
   newPostText: string;
 }) => {
   let postsElements = posts.map((p, index) => (

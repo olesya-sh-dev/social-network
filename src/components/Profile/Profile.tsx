@@ -3,6 +3,8 @@ import { MyPosts } from "./My posts/MyPosts";
 import { Person } from "./Person/Person";
 
 import { ProfilePropsType } from "../redux/store";
+import { Action } from "redux";
+import { ActionsProfileType } from "../redux/profile-reducer";
 
 export const Profile = ({
   posts,
@@ -11,7 +13,7 @@ export const Profile = ({
   // updateNewPostText,
   newPostText,
 }: ProfilePropsType & {
-  dispatch: (action: any) => void;
+  dispatch: (action: ActionsProfileType) => void;
   // addPost: (newPostText: string) => void;
   // updateNewPostText: (text: string) => void;
 }) => {
