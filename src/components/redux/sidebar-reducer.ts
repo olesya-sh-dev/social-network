@@ -1,4 +1,9 @@
+
 import { SidebarPropsType } from "./store";
+
+export type ChangeFrendsInSidebarActionCreatorType = ReturnType<typeof changeFrendsInSidebarActionCreator>;
+
+export type ActionsSidebarType = ChangeFrendsInSidebarActionCreatorType
 
 let initialState = {
   friends: [
@@ -21,7 +26,9 @@ let initialState = {
 };
 export const sidebarReducer = (
   state: SidebarPropsType = initialState,
-  action: any
+  action: ActionsSidebarType
 ) => {
   return state;
 };
+
+export const changeFrendsInSidebarActionCreator = () => ({ type: "ADD-FRIEND" });

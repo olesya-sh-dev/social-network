@@ -1,8 +1,15 @@
 import { v1 } from "uuid";
 import { DialogsPropsType, MessagePropsType } from "./store";
 
-const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+// const ADD_MESSAGE = "ADD-MESSAGE";
+// const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+
+export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>;
+export type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>;
+
+export type ActionsDialogsType = AddMessageActionType
+  | UpdateNewMessageTextActionType
+ 
 let initialState = {
   dialogs: [
     {
@@ -43,14 +50,14 @@ let initialState = {
     { id: "4", message: "Yo" },
     { id: "5", message: "Yo" },
   ],
-  newMessageBody: "+++",
+  newMessageBody: "type a message here...",
 };
 export const dialogsReducer = (
   state: DialogsPropsType = initialState,
-  action: any
+  action: ActionsDialogsType
 ) => {
   switch (action.type) {
-    case ADD_MESSAGE:
+    case "ADD-MESSAGE":
       let newMessageItem: MessagePropsType = {
         id: v1(),
         message: action.newMessageBody,
@@ -58,10 +65,10 @@ export const dialogsReducer = (
       return {
         ...state,
         messages: [...state.messages, newMessageItem],
-        newMessageBody: "",
+        newMessageBody: "type",
       };
-    case UPDATE_NEW_MESSAGE_TEXT:
-      return { ...state, newMessageBody: action.newMessageBody };
+    case "UPDATE-NEW-MESSAGE-TEXT":
+      return { ...state, newMessageBody: action.text };
     default:
       return state;
   }
@@ -69,13 +76,13 @@ export const dialogsReducer = (
 
 export const addMessageActionCreator = (newMessageBody: string) => {
   return {
-    type: ADD_MESSAGE,
+    type: "ADD-MESSAGE",
     newMessageBody,
-  };
+  } as const
 };
 export const updateNewMessageTextActionCreator = (text: string) => {
   return {
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessageBody: text,
-  };
+    type: "UPDATE-NEW-MESSAGE-TEXT",
+    text
+  } as const
 };
