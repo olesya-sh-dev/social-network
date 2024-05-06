@@ -14,17 +14,12 @@ function App() {
   return (
     <div className="app-wrapper">
       <Header />
-      <Navbar/>
+      <Navbar />
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/" element={<Navigate to="/profile" />} />
           <Route path="/profile" element={<ProfileContainer />} />
-          <Route
-            path="/dialogs"
-            element={
-              <DialogsContainer />
-            }
-          />
+          <Route path="/dialogs" element={<DialogsContainer />} />
         </Routes>
       </div>
     </div>

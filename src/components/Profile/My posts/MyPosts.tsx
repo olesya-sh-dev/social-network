@@ -1,6 +1,5 @@
 import { Post } from "./Post/Post";
 import s from "./MyPosts.module.css";
-import { ActionsProfileType } from "../../redux/profile-reducer";
 import { AddNewPostContainer } from "../../AddNewPostContainer";
 import { MyPostsMapPropsType } from "./MyPostsContainer";
 

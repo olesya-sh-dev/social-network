@@ -12,8 +12,8 @@ let rerenderEntireTree = (state: any) => {
     <BrowserRouter>
     <Provider store={store}>
       <App
-        state={state}
-        dispatch={store.dispatch.bind(store)}
+        // state={state}
+        // dispatch={store.dispatch.bind(store)}
       />
       </Provider>
     </BrowserRouter>,
