@@ -18,7 +18,7 @@ export const Dialogs = (props:DialogMapPropsType) => {
       <div className={s.messages}>
         {messagesElements}
           {/* <AddNewMessageContainer className="s.newMessage" /> */}
-      <AddNewMessage className="s.newMessage" addNewMessage={props.addNewMessage} updateNewMessageText={props.updateNewMessageText} newMessageBody={props.newMessageBody}/>
+      <AddNewMessage className={s.newMessage} addNewMessage={props.addNewMessage} updateNewMessageText={props.updateNewMessageText} newMessageBody={props.newMessageBody}/>
       </div>
     </div>
   );

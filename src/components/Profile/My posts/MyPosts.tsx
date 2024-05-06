@@ -1,16 +1,24 @@
 import { Post } from "./Post/Post";
-import s from "./MyPosts.module.css";
-import { AddNewPostContainer } from "../../AddNewPostContainer";
-import { MyPostsMapPropsType } from "./MyPostsContainer";
+import s from "./../../Profile/Profile.module.css";
 
-export const MyPosts = (props: MyPostsMapPropsType) => {
+
+import { AddNewPost } from "../../AddNewPost";
+import { ProfileMapPropsType } from "../ProfileContainer";
+
+export const MyPosts = (props: ProfileMapPropsType) => {
+  console.log(props); 
   let postsElements = props.posts.map((p, index) => (
     <Post key={index} id={p.id} message={p.message} likesCount={p.likesCount} />
   ));
   return (
     <div>
       My posts
-      <AddNewPostContainer className={s.newPost} />
+      <AddNewPost
+        className={s.newPostForm}
+        newPostText={props.newPostText}
+        addPost={props.addPost}
+        updateNewPostText={props.updateNewPostText}
+      />
       <div className={s.posts}>{postsElements}</div>
     </div>
   );
