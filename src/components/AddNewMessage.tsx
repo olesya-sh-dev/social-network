@@ -1,27 +1,21 @@
-import { ChangeEvent, useState } from "react";
-import { ActionsDialogsType, addMessageActionCreator, updateNewMessageTextActionCreator } from "./redux/dialogs-reducer";
+import { ChangeEvent } from "react";
+import { AddNewMessageMapPropsType } from "./AddNewMessageContainer";
 
-
-type AddNewMessagePropsType = {
-  className?: string;
-  dispatch: (action: ActionsDialogsType) => void;
-  // addNewMessage: (text: string) => void;
-  // upDateNewMessageText: (text: string) => void;
-  newMessageBody: string;
-};
-export const AddNewMessage = (props: AddNewMessagePropsType) => {
-  //const [message, setMessage] = useState<string>(props.newMessageBody);
+// type AddNewMessagePropsType = {
+//   className?: string;
+//   updateNewMessageText: (text: string) => void;
+//   addNewMessage: (newMessageBody: string) => void
+//   newMessageBody: string;
+// };
+export const AddNewMessage = (props: AddNewMessageMapPropsType & { className?: string }) => {
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //setMessage(e.currentTarget.value);
-    props.dispatch(updateNewMessageTextActionCreator(e.currentTarget.value));
-    //props.upDateNewMessageText!(e.currentTarget.value);
+      props.updateNewMessageText(e.currentTarget.value);
+  
 
   };
 
   const addMessageHandler = () => {
-    props.dispatch(addMessageActionCreator(props.newMessageBody));
-    //props.addNewMessage!(message);
-    //setMessage("");
+   props.addNewMessage(props.newMessageBody);    
   };
   return (
     <div className={props.className} style={{alignSelf: "flex-start", backgroundColor: "transparent"}}>

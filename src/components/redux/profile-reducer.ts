@@ -1,8 +1,14 @@
 import { v1 } from "uuid";
-import { PostPropsType, ProfilePropsType } from "./store";
+
 
 // const ADD_POST = "ADD-POST";
 //const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
+export type PostPropsType = {
+  id: string;
+  message: string;
+  likesCount: number;
+};
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>;
@@ -14,13 +20,14 @@ let initialState = {
   posts: [
     { id: "1", message: "Hi, how are you", likesCount: 15 },
     { id: "2", message: "It's my first post", likesCount: 20 },
-  ],
+  ] as Array<PostPropsType>,
   newPostText: "type here...",
 };
+type ProfilePropsType = typeof initialState
 export const profileReducer = (
   state: ProfilePropsType = initialState,
   action: ActionsProfileType
-) => {
+): ProfilePropsType => {
   switch (action.type) {
     case "ADD-POST":
       console.log("add");

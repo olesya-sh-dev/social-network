@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./Person.module.css";
 export const Person = () => {
   return (

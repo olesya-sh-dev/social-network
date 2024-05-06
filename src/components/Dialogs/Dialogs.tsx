@@ -1,21 +1,12 @@
 import React from "react";
 import s from "./Dialogs.module.css";
-
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
-import { DialogsPropsType } from "../redux/store";
+import { AddNewMessageContainer } from "../AddNewMessageContainer";
+import { DialogMapPropsType } from "./DialogsContainer";
 
-import { AddNewMessage } from "../AddNewMessage";
 
-export const Dialogs = ({
-  dialogs,
-  messages,
-  dispatch,
-  newMessageBody,
-}: DialogsPropsType & {
-  dispatch: (action: any) => void;
-  newMessageBody: string;
-}) => {
+export const Dialogs = ({ dialogs, messages }:DialogMapPropsType)=> {
   let dialogsElements = dialogs.map((el, index) => (
     <DialogItem key={index} name={el.name} id={el.id} img={el.img} />
   ));
@@ -27,11 +18,7 @@ export const Dialogs = ({
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>
         {messagesElements}
-        <AddNewMessage
-          className={s.newMessage}
-          dispatch={dispatch}
-          newMessageBody={newMessageBody}
-        />
+          <AddNewMessageContainer className="s.newMessage" />
       </div>
     </div>
   );

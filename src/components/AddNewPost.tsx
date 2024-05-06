@@ -4,24 +4,22 @@ import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
 } from "../components/redux/profile-reducer";
+import { AddNewPostMapPropsType } from "./AddNewPostContainer";
 
-type AddNewItemPropsType = {
-  className?: string;
-  newPostText: string;
-  dispatch: (action: ActionsProfileType) => void;
-};
-export const AddNewPost = (props: AddNewItemPropsType) => {
-  //let newItem = useRef<HTMLTextAreaElement>(null);
-  //const [title, setTitle] = useState<string>(props.newPostText);
+// type AddNewItemPropsType = {
+//   className?: string;
+//   newPostText: string;
+//   addPost: (newPostText: string) => void;
+//   updateNewPostText: (text: string) => void;
+// };
+export const AddNewPost = (props:AddNewPostMapPropsType & { className?: string }) => {
 
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //setTitle(e.currentTarget.value);
-    props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value)); //props.updateNewPostText!(e.currentTarget.value);
+  props.updateNewPostText(e.currentTarget.value)
   };
 
   const addItemHandler = () => {
-  props.dispatch(addPostActionCreator(props.newPostText)); //props.addPost!(title);
-  //   setTitle("");
+   props.addPost(props.newPostText)
   };
 
   return (

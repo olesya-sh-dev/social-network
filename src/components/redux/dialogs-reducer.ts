@@ -1,14 +1,24 @@
 import { v1 } from "uuid";
-import { DialogsPropsType, MessagePropsType } from "./store";
+import { DialogItemPropsType } from "../Dialogs/DialogItem";
+//import { DialogsPropsType, MessagePropsType } from "./store";
 
 // const ADD_MESSAGE = "ADD-MESSAGE";
 // const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
-export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>;
-export type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>;
+export type MessagePropsType = {
+  id: string;
+  message: string;
+};
+export type DialogsPropsType = {
+  dialogs: DialogItemPropsType[];
+  messages: MessagePropsType[];
+  newMessageBody: string;
+};
+export type AddMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>;
+export type UpdateNewMessageTextActionCreatorType = ReturnType<typeof updateNewMessageTextActionCreator>;
 
-export type ActionsDialogsType = AddMessageActionType
-  | UpdateNewMessageTextActionType
+export type ActionsDialogsType = AddMessageActionCreatorType
+  | UpdateNewMessageTextActionCreatorType
  
 let initialState = {
   dialogs: [
@@ -55,7 +65,7 @@ let initialState = {
 export const dialogsReducer = (
   state: DialogsPropsType = initialState,
   action: ActionsDialogsType
-) => {
+): DialogsPropsType => {
   switch (action.type) {
     case "ADD-MESSAGE":
       let newMessageItem: MessagePropsType = {

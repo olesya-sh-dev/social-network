@@ -4,38 +4,38 @@ import { dialogsReducer } from "./dialogs-reducer";
 import { sidebarReducer } from "./sidebar-reducer";
 
 
-export type PostPropsType = {
+type PostPropsType = {
   id: string;
   message: string;
   likesCount: number;
 };
-export type MyPostsPropsType = {
+type MyPostsPropsType = {
   posts: PostPropsType[];
 };
 
-export type ProfilePropsType = 
+type ProfilePropsType = 
   MyPostsPropsType & {
   newPostText: string;
 }
-export type MessagePropsType = {
+type MessagePropsType = {
   id: string;
   message: string;
 };
 
-export type DialogItemPropsType = {
+type DialogItemPropsType = {
   name: string;
   id: string;
   img: string;
 };
-export type DialogsPropsType = {
+type DialogsPropsType = {
   dialogs: DialogItemPropsType[];
   messages: MessagePropsType[];
   newMessageBody: string;
 };
-export type SidebarPropsType = {
+type SidebarPropsType = {
   friends: DialogItemPropsType[];
 };
-export type StateType = {
+type StateType = {
   profilePage: {
     posts: PostPropsType[];
     newPostText: string;
@@ -49,7 +49,8 @@ export type StateType = {
     friends: DialogItemPropsType[];
   };
 };
-export const store = {
+//export 
+const store = {
   _state: {
     profilePage: {
       posts: [
