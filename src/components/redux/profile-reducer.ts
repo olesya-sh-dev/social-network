@@ -23,7 +23,7 @@ let initialState = {
   ] as Array<PostPropsType>,
   newPostText: "type here...",
 };
-type ProfilePropsType = typeof initialState
+export type ProfilePropsType = typeof initialState
 export const profileReducer = (
   state: ProfilePropsType = initialState,
   action: ActionsProfileType
