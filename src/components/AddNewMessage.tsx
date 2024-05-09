@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { Button } from "./Button";
 //import { AddNewMessageMapPropsType } from "./AddNewMessageContainer";
 
 type AddNewMessagePropsType = {
@@ -17,7 +18,8 @@ export const AddNewMessage = (props: AddNewMessagePropsType) => {
   return (
     <div className={props.className} style={{alignSelf: "flex-start", backgroundColor: "transparent"}}>
       <textarea value={props.newMessageBody} onChange={onChangeMessageHandler}></textarea>
-      <button onClick={addMessageHandler}>send</button>
+      {/* <button onClick={addMessageHandler}>send</button> */}
+      <Button onClick={addMessageHandler}>send</Button>
     </div>
   );
 };

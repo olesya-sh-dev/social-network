@@ -1,4 +1,5 @@
 import React, { ChangeEvent} from "react";
+import { Button } from "./Button";
 
 //import { AddNewPostMapPropsType } from "./AddNewPostContainer";
 
@@ -21,7 +22,8 @@ export const AddNewPost = (props: AddNewItemPropsType) => {
   return (
     <div className={props.className}>
       <textarea value={props.newPostText} onChange={onChangeHandler}></textarea>
-      <button onClick={addItemHandler}>ADD</button>
+      {/* <button onClick={addItemHandler}>ADD</button> */}
+      <Button onClick={addItemHandler}>ADD</Button>
     </div>
   );
 };
