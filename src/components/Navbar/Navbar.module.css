@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 15px;
   padding: 30px;
-  height: 100vh;
+  height: 100%;
   grid-area: navbar;
   background-color: rgb(254, 197, 206);
   ul {

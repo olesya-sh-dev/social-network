@@ -1,0 +1,33 @@
+.userBlock{
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+    border: 2px solid rgb(251, 63, 92);
+    border-radius: 20px;  
+    padding: 20px;
+    align-self: center;
+    background-color: rgb(254, 197, 206);
+    gap: 100px
+}
+.colomnInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;   
+}
+.colomnInfo button{
+    align-self: center !important;
+}
+.userImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.userInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(249, 250, 255);
+    gap:100px;
+    
+}

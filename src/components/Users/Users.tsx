@@ -1,5 +1,6 @@
 import { Button } from "../Button";
 import { UsersMapPropsType } from "./UsersContainer";
+import s from "./Users.module.css"
 
 export const Users = (props: UsersMapPropsType) => {
   if (props.users.length === 0) {
@@ -52,10 +53,10 @@ export const Users = (props: UsersMapPropsType) => {
   return (
     <>
       {props.users.map((u, index) => (
-        <div style={{ display: "flex" }} key={index}>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+        <div className={s.userBlock} key={index}>
+          <div className={s.colomnInfo}>
             <img
-              style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+              className={s.userImg}
               src={u.photoUrl}
               alt="img"
            
@@ -80,12 +81,12 @@ export const Users = (props: UsersMapPropsType) => {
             )}
           </div>
 
-          <div style={{ display: "flex" }}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className={s.userInfo}>
+            <div className={s.colomnInfo}>
               <div >{u.fullName}</div>
               <span>{u.status}</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className={s.colomnInfo}>
               <span>{u.location.city}</span>
               <span>{u.location.country}</span>
             </div>
