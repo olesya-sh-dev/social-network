@@ -9,52 +9,7 @@ export const Users = (props: UsersMapPropsType) => {
       props.setUsers(response.data.items);
     });
   
-  
-  // props.setUsers([{
-  //   id: 1,
-  //   photoUrl:
-  //     "https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303073.jpg?w=826&t=st=1712399351~exp=1712399951~hmac=27776bd4ae88075e2fe852104bd704e20c8e84863033d0a0a3cc2c401aa3788e",
-  //   followed: true,
-  //   fullName: "Dimych",
-  //   status: "I am a boss",
-  //   location: { city: "Minsk", country: "Belarus" },
-  // },
-  // {
-  //   id: 2,
-  //   photoUrl:
-  //     "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
-  //   followed: false,
-  //   fullName: "Andrey",
-  //   status: "I am a boss",
-  //   location: { city: "Moscow", country: "Russia" },
-  // },
-  // {
-  //   id: 3,
-  //   photoUrl:
-  //     "https://img.freepik.com/premium-psd/3d-male-cartoon-character-avatar_235528-1107.jpg?w=826",
-  //   followed: true,
-  //   fullName: "Sveta",
-  //   status: "I am a boss",
-  //   location: { city: "Minsk", country: "Belarus" },
-  // },
-  // {
-  //   id: 4,
-  //   photoUrl:
-  //     "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
-  //   followed: false,
-  //   fullName: "Sasha",
-  //   status: "I am a boss too",
-  //   location: { city: "Kiev", country: "Ukraine" },
-  // },
-  // {
-  //   id: 5,
-  //   photoUrl:
-  //     "https://img.freepik.com/premium-psd/3d-render-cartoon-avatar-isolated_570939-88.jpg?w=826",
-  //   followed: true,
-  //   fullName: "Valera",
-  //   status: "I am a boss too",
-  //   location: { city: "Minsk", country: "Belarus" },
-  // },])
+
   }
   return (
     <>

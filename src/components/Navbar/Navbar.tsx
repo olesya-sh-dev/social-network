@@ -21,6 +21,12 @@ export const Navbar = () => {
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? s.active : s.item)}
+        to={"/users"}
+      >
+        Users
+      </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? s.active : s.item)}
         to={"/news"}
       >
         News
