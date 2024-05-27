@@ -1,54 +1,60 @@
 import { Button } from "../Button";
 import { UsersMapPropsType } from "./UsersContainer";
 import s from "./Users.module.css"
+import axios from "axios";
 
 export const Users = (props: UsersMapPropsType) => {
   if (props.users.length === 0) {
-  props.setUsers([{
-    id: 1,
-    photoUrl:
-      "https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303073.jpg?w=826&t=st=1712399351~exp=1712399951~hmac=27776bd4ae88075e2fe852104bd704e20c8e84863033d0a0a3cc2c401aa3788e",
-    followed: true,
-    fullName: "Dimych",
-    status: "I am a boss",
-    location: { city: "Minsk", country: "Belarus" },
-  },
-  {
-    id: 2,
-    photoUrl:
-      "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
-    followed: false,
-    fullName: "Andrey",
-    status: "I am a boss",
-    location: { city: "Moscow", country: "Russia" },
-  },
-  {
-    id: 3,
-    photoUrl:
-      "https://img.freepik.com/premium-psd/3d-male-cartoon-character-avatar_235528-1107.jpg?w=826",
-    followed: true,
-    fullName: "Sveta",
-    status: "I am a boss",
-    location: { city: "Minsk", country: "Belarus" },
-  },
-  {
-    id: 4,
-    photoUrl:
-      "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
-    followed: false,
-    fullName: "Sasha",
-    status: "I am a boss too",
-    location: { city: "Kiev", country: "Ukraine" },
-  },
-  {
-    id: 5,
-    photoUrl:
-      "https://img.freepik.com/premium-psd/3d-render-cartoon-avatar-isolated_570939-88.jpg?w=826",
-    followed: true,
-    fullName: "Valera",
-    status: "I am a boss too",
-    location: { city: "Minsk", country: "Belarus" },
-  },])
+    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
+      props.setUsers(response.data.items);
+    });
+  
+  
+  // props.setUsers([{
+  //   id: 1,
+  //   photoUrl:
+  //     "https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303073.jpg?w=826&t=st=1712399351~exp=1712399951~hmac=27776bd4ae88075e2fe852104bd704e20c8e84863033d0a0a3cc2c401aa3788e",
+  //   followed: true,
+  //   fullName: "Dimych",
+  //   status: "I am a boss",
+  //   location: { city: "Minsk", country: "Belarus" },
+  // },
+  // {
+  //   id: 2,
+  //   photoUrl:
+  //     "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
+  //   followed: false,
+  //   fullName: "Andrey",
+  //   status: "I am a boss",
+  //   location: { city: "Moscow", country: "Russia" },
+  // },
+  // {
+  //   id: 3,
+  //   photoUrl:
+  //     "https://img.freepik.com/premium-psd/3d-male-cartoon-character-avatar_235528-1107.jpg?w=826",
+  //   followed: true,
+  //   fullName: "Sveta",
+  //   status: "I am a boss",
+  //   location: { city: "Minsk", country: "Belarus" },
+  // },
+  // {
+  //   id: 4,
+  //   photoUrl:
+  //     "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_235528-1107.jpg?w=826",
+  //   followed: false,
+  //   fullName: "Sasha",
+  //   status: "I am a boss too",
+  //   location: { city: "Kiev", country: "Ukraine" },
+  // },
+  // {
+  //   id: 5,
+  //   photoUrl:
+  //     "https://img.freepik.com/premium-psd/3d-render-cartoon-avatar-isolated_570939-88.jpg?w=826",
+  //   followed: true,
+  //   fullName: "Valera",
+  //   status: "I am a boss too",
+  //   location: { city: "Minsk", country: "Belarus" },
+  // },])
   }
   return (
     <>
@@ -57,7 +63,7 @@ export const Users = (props: UsersMapPropsType) => {
           <div className={s.colomnInfo}>
             <img
               className={s.userImg}
-              src={u.photoUrl}
+              src={u.photos.small ? u.photos.small : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"}
               alt="img"
            
             />
@@ -83,12 +89,12 @@ export const Users = (props: UsersMapPropsType) => {
 
           <div className={s.userInfo}>
             <div className={s.colomnInfo}>
-              <div >{u.fullName}</div>
+              <div >{u.name}</div>
               <span>{u.status}</span>
             </div>
             <div className={s.colomnInfo}>
-              <span>{u.location.city}</span>
-              <span>{u.location.country}</span>
+              <span>{"u.location.city"}</span>
+              <span>{"u.location.country"}</span>
             </div>
           </div>
         </div>

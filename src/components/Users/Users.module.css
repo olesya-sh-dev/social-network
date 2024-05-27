@@ -1,13 +1,13 @@
 .userBlock{
     display: flex;
     justify-content: flex-start;
-    width: 50%;
+    width: 60%;
     border: 2px solid rgb(251, 63, 92);
     border-radius: 20px;  
     padding: 20px;
     align-self: center;
     background-color: rgb(254, 197, 206);
-    gap: 100px
+    gap: 20px
 }
 .colomnInfo{
     display: flex;

@@ -1,11 +1,21 @@
-export type UserType = {
-  id: number;
-  photoUrl: string;
-  followed: boolean;
-  fullName: string;
-  status: string;
-  location: { city: string; country: string };
-};
+// export type UserType = {
+//   id: number;
+//   photoUrl: string;
+//   followed: boolean;
+//   fullName: string;
+//   status: string;
+//   location: { city: string; country: string };
+// };
+export type UserType ={
+  name: string
+    id: number
+    photos: {
+      small: string
+      large: string
+    }
+    status: any
+    followed: boolean
+}
 
 const initialState = {
   users: [] as UserType[]
