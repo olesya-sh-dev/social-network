@@ -18,7 +18,10 @@ export type UserType ={
 }
 
 const initialState = {
-  users: [] as UserType[]
+  users: [] as UserType[],
+  pageSize:5,
+  totalUsersCount: 0,
+  currentPage: 5
 };
 type InitialStateType = typeof initialState;
 
@@ -26,11 +29,15 @@ type SetUsersActionCreatorType = ReturnType<typeof setUsersAC>;
 
 type FollowctionCreatorType = ReturnType<typeof followAC>;
 type UnfollowctionCreatorType = ReturnType<typeof unfollowAC>;
+type CurrentPageActionCreatorType = ReturnType<typeof currentPageAC>;
+type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCountAC>;
 
 type ActionType =
   | SetUsersActionCreatorType
   | FollowctionCreatorType
-  | UnfollowctionCreatorType;
+  | UnfollowctionCreatorType
+  | CurrentPageActionCreatorType
+  | SetTotalUsersCountActionCreatorType;
 export const usersReducer = (
   state: InitialStateType = initialState,
   action: ActionType
@@ -64,6 +71,18 @@ export const usersReducer = (
         users: [...action.users],
       };
     }
+    case "CURRENT-PAGE": {
+      return {
+        ...state,
+        currentPage: action.currentPage
+      }
+    }
+    case "SET-TOTAL-USERS-COUNT": {
+      return {
+        ...state,
+        totalUsersCount: action.totalCount
+      }
+    }
     default:
       return state;
   }
@@ -86,5 +105,17 @@ export const unfollowAC = (userId: number) => {
   return {
     type: "UNFOLLOW",
     userId,
+  } as const;
+};
+export const currentPageAC = (currentPage: number) => {
+  return {
+    type: "CURRENT-PAGE",
+    currentPage,
+  } as const;
+};
+export const setTotalUsersCountAC = (totalCount: number) => {
+  return {
+    type: "SET-TOTAL-USERS-COUNT",
+    totalCount,
   } as const;
 };

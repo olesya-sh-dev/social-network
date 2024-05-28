@@ -4,23 +4,53 @@ import { Button } from "../Button";
 import axios from "axios";
 import { UsersMapPropsType } from "./UsersContainer";
 
-class UsersClass extends React.Component<UsersMapPropsType> {
+class UsersAPIComponent extends React.Component<UsersMapPropsType> {
   // если кроме super в конструкторе ничего нет, то можно не писать, он идет по умолчанию
   // constructor(props: UsersMapPropsType) {
   //   super(props);
   // }
   componentDidMount() {
+    console.log(this.props.currentPage);
+    console.log(this.props.pageSize);
     axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+     
       .then((response) => {
         this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
       });
   }
 
+  onPageChanged = (pageNumber: number) => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
+  };
   render() {
+    //console.log(this.props.totalUsersCount);
+    //console.log(this.props.pageSize);
+    let pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
     return (
       <>
-
+        <div className={s.pages}>
+        
+          {pages.map((p) => {
+            return <span className={this.props.currentPage===p ? s.selectedPage: ""} onClick = {(e) => {this.onPageChanged(p)}} key={p}>{p}</span>;
+          })}
+        </div>
         {this.props.users.map((u, index) => (
           <div className={s.userBlock} key={index}>
             <div className={s.colomnInfo}>
@@ -69,4 +99,4 @@ class UsersClass extends React.Component<UsersMapPropsType> {
   }
 }
 
-export default UsersClass;
+export default UsersAPIComponent;
