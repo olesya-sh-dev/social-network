@@ -1,33 +1,48 @@
 import { Button } from "../Button";
-import { UsersMapPropsType } from "./UsersContainer";
-import s from "./Users.module.css"
-import axios from "axios";
+import { UserType } from "../redux/users-reducer";
+import s from "./Users.module.css";
 
-export const Users = (props: UsersMapPropsType) => {
-  if (props.users.length === 0) {
-    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response) => {
-      props.setUsers(response.data.items);
-    });
-  
 
+export const Users= (props: {totalUsersCount: number, pageSize: number, currentPage: number, users: UserType[], follow: (userId: number) => void, unfollow: (userId: number) => void, onPageChanged: (pageNumber: number) => void }) => {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
   return (
     <>
+      <div className={s.pages}>
+        {pages.map((p) => {
+          return (
+            <span
+              className={props.currentPage === p ? s.selectedPage : ""}
+              onClick={(e) => {
+                props.onPageChanged(p);
+              }}
+              key={p}
+            >
+              {p}
+            </span>
+          );
+        })}
+      </div>
       {props.users.map((u, index) => (
         <div className={s.userBlock} key={index}>
           <div className={s.colomnInfo}>
             <img
               className={s.userImg}
-              src={u.photos.small ? u.photos.small : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"}
+              src={
+                u.photos.small
+                  ? u.photos.small
+                  : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"
+              }
               alt="img"
-           
             />
             {u.followed ? (
-              <Button 
+              <Button
                 onClick={() => {
                   props.unfollow(u.id);
                 }}
-                
               >
                 Unfollow
               </Button>
@@ -44,7 +59,7 @@ export const Users = (props: UsersMapPropsType) => {
 
           <div className={s.userInfo}>
             <div className={s.colomnInfo}>
-              <div >{u.name}</div>
+              <div>{u.name}</div>
               <span>{u.status}</span>
             </div>
             <div className={s.colomnInfo}>
@@ -56,5 +71,4 @@ export const Users = (props: UsersMapPropsType) => {
       ))}
     </>
   );
-}
-
+};

@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { Profile } from "./components/Profile/Profile";
 import { AppStateType } from "./components/redux/redux-store";
-import { UsersContainer } from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 //import { store } from "./components/redux/redux-store";
 
 // interface AppPropsType {
