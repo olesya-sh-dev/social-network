@@ -26,13 +26,13 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-type SetUsersActionCreatorType = ReturnType<typeof setUsersAC>;
+type SetUsersActionCreatorType = ReturnType<typeof setUsers>;
 
-type FollowctionCreatorType = ReturnType<typeof followAC>;
-type UnfollowctionCreatorType = ReturnType<typeof unfollowAC>;
-type CurrentPageActionCreatorType = ReturnType<typeof currentPageAC>;
-type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCountAC>;
-type ToggleIsFetchingActionCreatorType = ReturnType<typeof setIsFetchingAC>;
+type FollowctionCreatorType = ReturnType<typeof follow>;
+type UnfollowctionCreatorType = ReturnType<typeof unfollow>;
+type CurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>;
+type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCount>;
+type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>;
 
 type ActionType =
   | SetUsersActionCreatorType
@@ -98,38 +98,38 @@ export const usersReducer = (
   }
 };
 
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
   return {
     type: "SET-USERS",
     users,
   } as const;
 };
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
   return {
     type: "FOLLOW",
     userId,
   } as const;
 };
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
   return {
     type: "UNFOLLOW",
     userId,
   } as const;
 };
-export const currentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
   return {
     type: "CURRENT-PAGE",
     currentPage,
   } as const;
 };
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
   return {
     type: "SET-TOTAL-USERS-COUNT",
     totalCount,
   } as const;
 };
-export const setIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
   return {
     type: "TOGGLE-IS-FETCHING",
     isFetching,
