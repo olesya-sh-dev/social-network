@@ -11,7 +11,7 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
   }
   return (
     <>
-      <div className={s.pages}>
+          <div className={s.pages}>
         {pages.map((p) => {
           return (
             <span
