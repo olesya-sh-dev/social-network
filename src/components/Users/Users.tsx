@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { Button } from "../Button";
 import { UserType } from "../redux/users-reducer";
 import s from "./Users.module.css";
@@ -29,7 +30,8 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
       {props.users.map((u, index) => (
         <div className={s.userBlock} key={index}>
           <div className={s.colomnInfo}>
-            <img
+            <NavLink to={"/profile/" }>
+                       <img
               className={s.userImg}
               src={
                 u.photos.small
@@ -38,6 +40,8 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
               }
               alt="img"
             />
+               
+               </NavLink>
             {u.followed ? (
               <Button
                 onClick={() => {

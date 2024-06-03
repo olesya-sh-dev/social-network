@@ -6,6 +6,7 @@ import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { Profile } from "./components/Profile/Profile";
 import { AppStateType } from "./components/redux/redux-store";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 //import { store } from "./components/redux/redux-store";
 
 // interface AppPropsType {
@@ -23,7 +24,7 @@ function App({ state }: { state: AppStateType }) {
           <Route path="/" element={<Navigate to="/profile" />} />
           <Route
             path="/profile"
-            element={<Profile posts={state.profilePage.posts} />}
+            element={<ProfileContainer />}
           />
           <Route path="/dialogs" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />

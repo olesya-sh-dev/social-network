@@ -1,3 +1,4 @@
+
 import { v1 } from "uuid";
 
 
@@ -12,9 +13,11 @@ export type PostPropsType = {
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>;
+type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export type ActionsProfileType = AddPostActionType
   | UpdateNewPostTextActionType
+  | SetUserProfileActionType
 
 let initialState = {
   posts: [
@@ -22,6 +25,7 @@ let initialState = {
     { id: "2", message: "It's my first post", likesCount: 20 },
   ] as Array<PostPropsType>,
   newPostText: "type here...",
+  profile: null
 };
 export type ProfilePropsType = typeof initialState
 export const profileReducer = (
@@ -47,6 +51,11 @@ export const profileReducer = (
         ...state,
         newPostText: action.text,
       };
+      case "SET-USER-PROFILE":
+        return {
+          ...state,
+          profile: action.profile
+        }
     default:
       return state;
   }
@@ -65,3 +74,9 @@ export const updateNewPostTextActionCreator = (text: string) => {
     text, 
   } as const  
 };
+export const setUserProfile = (profile: any) => {
+  return {
+    type: "SET-USER-PROFILE",
+    profile
+  } as const
+}
