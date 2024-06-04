@@ -23,7 +23,7 @@ function App({ state }: { state: AppStateType }) {
         <Routes>
           <Route path="/" element={<Navigate to="/profile" />} />
           <Route
-            path="/profile"
+            path="/profile/:userId"
             element={<ProfileContainer />}
           />
           <Route path="/dialogs" element={<DialogsContainer />} />

@@ -30,7 +30,7 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
       {props.users.map((u, index) => (
         <div className={s.userBlock} key={index}>
           <div className={s.colomnInfo}>
-            <NavLink to={"/profile/" }>
+            <NavLink to={"/profile/" + u.id}>
                        <img
               className={s.userImg}
               src={
