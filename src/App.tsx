@@ -1,12 +1,11 @@
 import "./App.css";
-import { Header } from "./components/Header/Header";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
-import { Profile } from "./components/Profile/Profile";
 import { AppStateType } from "./components/redux/redux-store";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 //import { store } from "./components/redux/redux-store";
 
 // interface AppPropsType {
@@ -17,7 +16,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 function App({ state }: { state: AppStateType }) {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <div className="app-wrapper-content">
         <Routes>

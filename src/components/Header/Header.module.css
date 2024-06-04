@@ -9,3 +9,15 @@
     height: 45px;
   }
 }
+.loginBlock {
+  float: right;
+  margin-right: 30px;
+  margin-top: 10px;
+  a {
+    color: rgb(249, 250, 255);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+}
