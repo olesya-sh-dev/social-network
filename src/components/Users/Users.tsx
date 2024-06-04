@@ -2,9 +2,17 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../Button";
 import { UserType } from "../redux/users-reducer";
 import s from "./Users.module.css";
+import axios from "axios";
 
-
-export const Users= (props: {totalUsersCount: number, pageSize: number, currentPage: number, users: UserType[], follow: (userId: number) => void, unfollow: (userId: number) => void, onPageChanged: (pageNumber: number) => void }) => {
+export const Users = (props: {
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  users: UserType[];
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
+  onPageChanged: (pageNumber: number) => void;
+}) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -12,7 +20,7 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
   }
   return (
     <>
-          <div className={s.pages}>
+      <div className={s.pages}>
         {pages.map((p) => {
           return (
             <span
@@ -31,21 +39,36 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
         <div className={s.userBlock} key={index}>
           <div className={s.colomnInfo}>
             <NavLink to={"/profile/" + u.id}>
-                       <img
-              className={s.userImg}
-              src={
-                u.photos.small
-                  ? u.photos.small
-                  : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"
-              }
-              alt="img"
-            />
-               
-               </NavLink>
+              <img
+                className={s.userImg}
+                src={
+                  u.photos.small
+                    ? u.photos.small
+                    : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"
+                }
+                alt="img"
+              />
+            </NavLink>
+
             {u.followed ? (
               <Button
                 onClick={() => {
-                  props.unfollow(u.id);
+                  axios
+                    .delete(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+
+                      {
+                        withCredentials: true,
+                        headers: {
+                          "API-KEY": "1526cfeb-08ab-42c4-8d63-63741f5841f1",
+                        },
+                      }
+                    )
+                    .then((response) => {
+                      if (response.data.resultCode === 0) {
+                        props.unfollow(u.id);
+                      }
+                    });
                 }}
               >
                 Unfollow
@@ -53,7 +76,22 @@ export const Users= (props: {totalUsersCount: number, pageSize: number, currentP
             ) : (
               <Button
                 onClick={() => {
-                  props.follow(u.id);
+                  axios
+                    .post(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                      {},
+                      {
+                        withCredentials: true,
+                        headers: {
+                          "API-KEY": "1526cfeb-08ab-42c4-8d63-63741f5841f1",
+                        },
+                      }
+                    )
+                    .then((response) => {
+                      if (response.data.resultCode === 0) {
+                        props.follow(u.id);
+                      }
+                    });
                 }}
               >
                 Follow

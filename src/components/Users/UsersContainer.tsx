@@ -17,7 +17,10 @@ class UsersContainer extends React.Component<UsersMapPropsType> {
 this.props.toggleIsFetching(true)      
       axios
         .get(
-          `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+          `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+          { withCredentials: true, headers: {
+            "API-KEY": "1526cfeb-08ab-42c4-8d63-63741f5841f1",
+          },}
         )
        
         .then((response) => {
@@ -32,7 +35,10 @@ this.props.toggleIsFetching(true)
       this.props.toggleIsFetching(true) 
       axios
         .get(
-          `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+          `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true, headers: {
+              "API-KEY": "1526cfeb-08ab-42c4-8d63-63741f5841f1",
+            },}
         )
         .then((response) => {
           this.props.toggleIsFetching(false) 
