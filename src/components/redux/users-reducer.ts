@@ -1,3 +1,4 @@
+
 // export type UserType = {
 //   id: number;
 //   photoUrl: string;
@@ -22,25 +23,10 @@ const initialState = {
   pageSize:5,
   totalUsersCount: 0,
   currentPage: 5,
-  isFetching: false
+  isFetching: true,
+  followingInProgress: [] as Array<number>,
 };
-type InitialStateType = typeof initialState;
 
-type SetUsersActionCreatorType = ReturnType<typeof setUsers>;
-
-type FollowctionCreatorType = ReturnType<typeof follow>;
-type UnfollowctionCreatorType = ReturnType<typeof unfollow>;
-type CurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>;
-type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCount>;
-type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>;
-
-type ActionType =
-  | SetUsersActionCreatorType
-  | FollowctionCreatorType
-  | UnfollowctionCreatorType
-  | CurrentPageActionCreatorType
-  | SetTotalUsersCountActionCreatorType
-  | ToggleIsFetchingActionCreatorType;
 export const usersReducer = (
   state: InitialStateType = initialState,
   action: ActionType
@@ -92,6 +78,14 @@ export const usersReducer = (
         isFetching: action.isFetching
       }
     }
+    case "TOGGLE-IS-FOLLOWING-PROGRESS": {
+      return {
+        ...state,
+        followingInProgress: action.isFetching
+          ? [...state.followingInProgress, action.userId]
+          :state.followingInProgress.filter(id => id !== action.userId)
+      }
+    }
   
     default:
       return state;
@@ -135,3 +129,31 @@ export const toggleIsFetching = (isFetching: boolean) => {
     isFetching,
   } as const;
 };
+
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) => {
+  return {
+    type: "TOGGLE-IS-FOLLOWING-PROGRESS",
+    isFetching,
+    userId
+  } as const;
+}
+
+type InitialStateType = typeof initialState;
+
+type SetUsersActionCreatorType = ReturnType<typeof setUsers>;
+
+type FollowctionCreatorType = ReturnType<typeof follow>;
+type UnfollowctionCreatorType = ReturnType<typeof unfollow>;
+type CurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>;
+type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCount>;
+type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>;
+type ToggleFollowingProgressActionCreatorType = ReturnType<typeof toggleIsFollowingProgress>;
+
+type ActionType =
+  | SetUsersActionCreatorType
+  | FollowctionCreatorType
+  | UnfollowctionCreatorType
+  | CurrentPageActionCreatorType
+  | SetTotalUsersCountActionCreatorType
+  | ToggleIsFetchingActionCreatorType
+  | ToggleFollowingProgressActionCreatorType;
