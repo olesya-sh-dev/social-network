@@ -1,4 +1,8 @@
-import { isJSDocAuthorTag } from "typescript";
+
+import { ThunkAction } from "redux-thunk";
+import { authAPI } from "../../api/api";
+import { Dispatch } from "redux";
+import { AppStateType } from "./redux-store";
 
 let initialState = {
   userId: null as number | null,
@@ -29,3 +33,18 @@ export const setAuthUserDataAC = (
   login: string | null,
  
 ) => ({ type: "SET_USER_DATA", payload: { userId, email, login} });
+
+
+export const getAuthUserDataThunkCreator = () => (dispatch: Dispatch) => {
+  return authAPI.me()
+  .then((response) => {
+    console.log(response.data);
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setAuthUserDataAC(id, email, login))
+    }
+  }
+  );
+}
+
+

@@ -1,5 +1,7 @@
 
+import { Dispatch } from "redux";
 import { v1 } from "uuid";
+import { usersAPI } from "../../api/api";
 
 
 // const ADD_POST = "ADD-POST";
@@ -79,4 +81,9 @@ export const setUserProfile = (profile: any) => {
     type: "SET-USER-PROFILE",
     profile
   } as const
+}
+export const getUserProfileThunkCreator = (userId: number) => (dispatch:Dispatch)=>{
+  usersAPI.getProfile(Number(userId)).then((response) => {
+    dispatch(setUserProfile(response.data))
+  });
 }
