@@ -1,4 +1,5 @@
 
+
 // export type UserType = {
 //   id: number;
 //   photoUrl: string;
@@ -6,6 +7,10 @@
 //   fullName: string;
 //   status: string;
 //   location: { city: string; country: string };
+
+import { Dispatch } from "redux"
+import { usersAPI } from "../../api/api"
+
 // };
 export type UserType ={
   name: string
@@ -142,8 +147,8 @@ type InitialStateType = typeof initialState;
 
 type SetUsersActionCreatorType = ReturnType<typeof setUsers>;
 
-type FollowctionCreatorType = ReturnType<typeof follow>;
-type UnfollowctionCreatorType = ReturnType<typeof unfollow>;
+type FollowActionCreatorType = ReturnType<typeof follow>;
+type UnfollowActionCreatorType = ReturnType<typeof unfollow>;
 type CurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>;
 type SetTotalUsersCountActionCreatorType = ReturnType<typeof setTotalUsersCount>;
 type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>;
@@ -151,9 +156,53 @@ type ToggleFollowingProgressActionCreatorType = ReturnType<typeof toggleIsFollow
 
 type ActionType =
   | SetUsersActionCreatorType
-  | FollowctionCreatorType
-  | UnfollowctionCreatorType
+  | FollowActionCreatorType
+  | UnfollowActionCreatorType
   | CurrentPageActionCreatorType
   | SetTotalUsersCountActionCreatorType
   | ToggleIsFetchingActionCreatorType
   | ToggleFollowingProgressActionCreatorType;
+
+  export const getUsersThunkCreator = (currentPage: number, pageSize: number)=> {
+  return (dispatch:Dispatch)=>{
+    dispatch(toggleIsFetching(true))
+
+    usersAPI
+      .getUsers(currentPage, pageSize)
+      .then((data) => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+        //dispatch(setCurrentPage(currentPage))
+      });
+  }
+}
+
+export const followThunkCreator = (userId: number) => {
+  return (dispatch: Dispatch) => {
+ dispatch(toggleIsFollowingProgress(true, userId));
+  usersAPI
+    .follow(userId)
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(follow(userId));
+      }
+      dispatch(toggleIsFollowingProgress(false, userId))
+}
+    );
+  }
+}
+export const unfollowThunkCreator = (userId: number) => {
+  return (dispatch: Dispatch) => {
+ dispatch(toggleIsFollowingProgress(true, userId));
+  usersAPI
+    .unfollow(userId)
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(unfollow(userId));
+      }
+      dispatch(toggleIsFollowingProgress(false, userId))
+}
+    );
+  }
+}
