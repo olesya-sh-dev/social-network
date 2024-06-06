@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setUserProfile } from "../redux/profile-reducer";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import React from "react";
+import { usersAPI } from "../../api/api";
 
 type RouterType = {
   userId: string | undefined;
@@ -58,21 +59,16 @@ function withRouter(Component: any) {
 class ProfileContainer extends React.Component<PropsType> {
   componentDidMount() {
     type UserIdType = string | undefined;
-    let userId: UserIdType = "27842";
+    let userId: UserIdType = "2";
 
     if (
       typeof this.props.router.params !== "string" &&
       "userId" in this.props.router.params
     ) {
       userId = this.props.router.params.userId;
-
-      axios
-        .get<UserProfileType>(
-          `https://social-network.samuraijs.com/api/1.0/profile/${userId}`
-        )
-        .then((response) => {
-          this.props.setUserProfile(response.data);
-        });
+      usersAPI.getProfile(Number(userId)).then((response) => {
+        this.props.setUserProfile(response.data);
+      });
     }
   }
   render() {
