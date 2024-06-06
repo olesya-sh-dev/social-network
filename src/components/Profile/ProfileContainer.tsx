@@ -1,9 +1,9 @@
 import { Profile } from "./Profile";
 import { connect } from "react-redux";
-
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate, Navigate } from "react-router-dom";
 import React from "react";
 import { getUserProfileThunkCreator } from "../redux/profile-reducer";
+
 
 type RouterType = {
   userId: string | undefined;
@@ -16,6 +16,7 @@ type PropsType = {
   getUserProfileThunkCreator: (userId: number) => void;
   profile: UserProfileType;
   router: RouterType;
+  isAuth: boolean;
 };
 
 export type ContactType = {
@@ -69,14 +70,16 @@ class ProfileContainer extends React.Component<PropsType> {
     }
   }
   render() {
+    if(!this.props.isAuth) return <Navigate to={'/login'}/>
     return <Profile {...this.props} profile={this.props.profile} />;
   }
 }
 let mapStateToProps = (state: any) => ({
   profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth
 });
 
-let withRouterProfileContainer = withRouter(ProfileContainer);
+let WithRouterProfileContainer = withRouter(ProfileContainer);
 export default connect(mapStateToProps, { getUserProfileThunkCreator })(
-  withRouterProfileContainer
+  WithRouterProfileContainer
 );
