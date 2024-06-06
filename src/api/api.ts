@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserProfileType } from "../components/Profile/ProfileContainer";
+import { AuthResponseDataType } from "../components/Header/HeaderContainer";
 
 const instance = axios.create({
   withCredentials: true,
@@ -25,5 +26,11 @@ export const usersAPI = {
   },
   getProfile(userId: number) {
     return instance.get<UserProfileType>(`profile/${userId}`);
+  },
+};
+
+export const authAPI = {
+  me() {
+    return instance.get<AuthResponseDataType>(`auth/me`);
   },
 };
