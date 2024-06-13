@@ -14,7 +14,7 @@ export const Dialogs = (props:DialogMapPropsType) => {
     <Message key={index} message={el.message} id={el.id} />
   ));
  
-  if (!props.isAuth) return <Navigate to="/login" />
+  //if (!props.isAuth) return <Navigate to="/login" />
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>

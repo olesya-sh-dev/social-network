@@ -4,12 +4,14 @@ import { AppStateType } from "../redux/redux-store";
 import { MessagePropsType, addMessageActionCreator, updateNewMessageTextActionCreator } from "../redux/dialogs-reducer";
 import { DialogItemPropsType } from "./DialogItem";
 import { Dispatch } from "redux";
+import { Navigate } from "react-router-dom";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     dialogs: DialogItemPropsType[]
     messages: MessagePropsType[]
     newMessageBody: string
-    isAuth: boolean
+    //isAuth: boolean
 }
 type MapDispatchPropsType = {
     updateNewMessageText: (text: string) => void;
@@ -21,7 +23,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageBody: state.dialogsPage.newMessageBody,
-        isAuth: state.auth.isAuth
+        //isAuth: state.auth.isAuth
          }
     }
     const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
@@ -35,4 +37,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         };
       };
 
- export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+      let DialogsRedirectComponent = withAuthRedirect(Dialogs);
+
+      // let DialogsRedirectComponent = (props: DialogMapPropsType) => {
+      //   if(!props.isAuth) return <Navigate to={'/login'}/>
+      //   return <Dialogs {...props} />;
+      // }; вынесено в отдельный компонент
+
+ export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsRedirectComponent)

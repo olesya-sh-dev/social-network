@@ -2,6 +2,7 @@
 import { Dispatch } from "redux";
 import { v1 } from "uuid";
 import { usersAPI } from "../../api/api";
+import { UserProfileType } from "../Profile/ProfileContainer";
 
 
 // const ADD_POST = "ADD-POST";
@@ -27,7 +28,8 @@ let initialState = {
     { id: "2", message: "It's my first post", likesCount: 20 },
   ] as Array<PostPropsType>,
   newPostText: "type here...",
-  profile: null
+  //TODO null протипизировать
+  profile: null 
 };
 export type ProfilePropsType = typeof initialState
 export const profileReducer = (
