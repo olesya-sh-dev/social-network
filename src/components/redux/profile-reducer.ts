@@ -2,7 +2,7 @@
 import { Dispatch } from "redux";
 import { v1 } from "uuid";
 import { usersAPI } from "../../api/api";
-import { UserProfileType } from "../Profile/ProfileContainer";
+import { ContactType, PhotoType, UserProfileType } from "../Profile/ProfileContainer";
 
 
 // const ADD_POST = "ADD-POST";
@@ -29,7 +29,7 @@ let initialState = {
   ] as Array<PostPropsType>,
   newPostText: "type here...",
   //TODO null протипизировать
-  profile: null 
+  profile: null as UserProfileType | null
 };
 export type ProfilePropsType = typeof initialState
 export const profileReducer = (
@@ -78,7 +78,7 @@ export const updateNewPostTextActionCreator = (text: string) => {
     text, 
   } as const  
 };
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: UserProfileType) => {
   return {
     type: "SET-USER-PROFILE",
     profile

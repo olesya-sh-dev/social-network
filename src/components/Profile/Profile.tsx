@@ -1,7 +1,8 @@
 import { MyPostsContainer } from "./My posts/MyPostsContainer";
+import { Person } from "./Person/Person";
 import { UserProfileType } from "./ProfileContainer";
 
-import { ProfileInfo} from "./ProfileInfo";
+import { ProfileInfo } from "./ProfileInfo";
 
 export type ProfilePropsType = {
   profile: UserProfileType;

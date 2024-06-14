@@ -98,4 +98,4 @@ export default compose(
     followThunkCreator,
     unfollowThunkCreator,
   })
-)(UsersContainer) as React.ComponentType;
+)(UsersContainer) as React.ComponentType //для TS, connect помещается после остальных оберток

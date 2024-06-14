@@ -1,12 +1,18 @@
 import { Profile } from "./Profile";
 import { connect } from "react-redux";
-import { useLocation, useParams, useNavigate, Navigate } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import React from "react";
 import { getUserProfileThunkCreator } from "../redux/profile-reducer";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { AppStateType } from "../redux/redux-store";
 import { compose } from "redux";
-
+import { Person } from "./Person/Person";
+import { log } from "console";
 
 type RouterType = {
   userId: string | undefined;
@@ -60,9 +66,10 @@ function withRouter(Component: any) {
 }
 
 class ProfileContainer extends React.Component<PropsType> {
+  
   componentDidMount() {
     type UserIdType = string | undefined;
-    let userId: UserIdType = "2";
+    let userId: UserIdType = "31073";
 
     if (
       typeof this.props.router.params !== "string" &&
@@ -70,15 +77,19 @@ class ProfileContainer extends React.Component<PropsType> {
     ) {
       userId = this.props.router.params.userId;
       this.props.getUserProfileThunkCreator(Number(userId));
+    } else {
+      this.props.getUserProfileThunkCreator(Number(userId));
     }
   }
+
   render() {
-    //if(!this.props.isAuth) return <Navigate to={'/login'}/>
-    return <Profile {...this.props} profile={this.props.profile} />;
+    return this.props ? (
+      <Profile {...this.props} profile={this.props.profile} />
+    ) : (
+      <Person />
+    );
   }
 }
-
-
 
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 // let AuthRedirectComponent = (props: PropsType) => {
@@ -102,9 +113,8 @@ let mapStateToProps = (state: AppStateType) => ({
 // )
 //   (ProfileContainer)
 
-  export default compose (
-    withRouter,
-    withAuthRedirect,
-    connect(mapStateToProps, { getUserProfileThunkCreator })
-  )
-  (ProfileContainer)
+export default compose(
+  withRouter,
+  withAuthRedirect,
+  connect(mapStateToProps, { getUserProfileThunkCreator })
+)(ProfileContainer);

@@ -8,7 +8,7 @@ import {
 } from "../redux/dialogs-reducer";
 import { DialogItemPropsType } from "./DialogItem";
 import { Dispatch, compose } from "redux";
-import { Navigate } from "react-router-dom";
+
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
