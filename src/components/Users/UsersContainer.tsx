@@ -15,6 +15,7 @@ import { AppStateType } from "../redux/redux-store";
 import React from "react";
 import { Preloader } from "../common/Preloader";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component<UsersMapPropsType> {
   // если кроме super в конструкторе ничего нет, то можно не писать, он идет по умолчанию
@@ -78,12 +79,23 @@ const mapStateToProps = (state: AppStateType) => {
   };
 };
 
-const UsersRedirectComponent = withAuthRedirect(UsersContainer);
+// const UsersRedirectComponent = withAuthRedirect(UsersContainer);
 
-export default connect(mapStateToProps, {
-  setCurrentPage,
-  toggleIsFollowingProgress,
-  getUsersThunkCreator,
-  followThunkCreator,
-  unfollowThunkCreator,
-})(UsersRedirectComponent);
+// export default connect(mapStateToProps, {
+//   setCurrentPage,
+//   toggleIsFollowingProgress,
+//   getUsersThunkCreator,
+//   followThunkCreator,
+//   unfollowThunkCreator,
+// })(UsersRedirectComponent);
+
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, {
+    setCurrentPage,
+    toggleIsFollowingProgress,
+    getUsersThunkCreator,
+    followThunkCreator,
+    unfollowThunkCreator,
+  })
+)(UsersContainer) as React.ComponentType;
