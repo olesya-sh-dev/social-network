@@ -4,15 +4,11 @@ import {
   useLocation,
   useParams,
   useNavigate,
-  Navigate,
 } from "react-router-dom";
 import React from "react";
-import { getUserProfileThunkCreator } from "../redux/profile-reducer";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { getStatus, getUserProfileThunkCreator, updateStatus } from "../redux/profile-reducer";
 import { AppStateType } from "../redux/redux-store";
 import { compose } from "redux";
-import { Person } from "./Person/Person";
-import { log } from "console";
 
 type RouterType = {
   userId: string | undefined;
@@ -26,6 +22,10 @@ type PropsType = {
   profile: UserProfileType;
   router: RouterType;
   isAuth: boolean;
+  getStatus: (userId: number) => void;
+  status: string;
+  updateStatus: (status: string) => void;
+
 };
 
 export type ContactType = {
@@ -80,14 +80,14 @@ class ProfileContainer extends React.Component<PropsType> {
     } else {
       this.props.getUserProfileThunkCreator(Number(userId));
     }
-  }
+   
+    this.props.getStatus(Number(userId))
+    }
 
   render() {
-    return this.props ? (
-      <Profile {...this.props} profile={this.props.profile} />
-    ) : (
-      <Person />
-    );
+    return (
+      <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
+    ) 
   }
 }
 
@@ -98,6 +98,7 @@ class ProfileContainer extends React.Component<PropsType> {
 // };
 let mapStateToProps = (state: AppStateType) => ({
   profile: state.profilePage.profile,
+  status: state.profilePage.status,
   //isAuth: state.auth.isAuth
 });
 
@@ -116,5 +117,5 @@ let mapStateToProps = (state: AppStateType) => ({
 export default compose<React.ComponentType>(
   withRouter,
   //withAuthRedirect,
-  connect(mapStateToProps, { getUserProfileThunkCreator })
+  connect(mapStateToProps, { getUserProfileThunkCreator, getStatus, updateStatus }),
 )(ProfileContainer);
