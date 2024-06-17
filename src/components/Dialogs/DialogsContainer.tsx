@@ -41,11 +41,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
   };
 };
 
-export default (compose(
+export default compose<React.ComponentType>(
   withAuthRedirect,
   connect(mapStateToProps, mapDispatchToProps)
-)(Dialogs)) as React.ComponentType;
-
+)(Dialogs);
 //let DialogsRedirectComponent = withAuthRedirect(Dialogs);
 
 // let DialogsRedirectComponent = (props: DialogMapPropsType) => {

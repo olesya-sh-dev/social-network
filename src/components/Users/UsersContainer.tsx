@@ -89,7 +89,7 @@ const mapStateToProps = (state: AppStateType) => {
 //   unfollowThunkCreator,
 // })(UsersRedirectComponent);
 
-export default compose(
+export default compose<React.ComponentType>(
   withAuthRedirect,
   connect(mapStateToProps, {
     setCurrentPage,
@@ -98,4 +98,4 @@ export default compose(
     followThunkCreator,
     unfollowThunkCreator,
   })
-)(UsersContainer) as React.ComponentType //для TS, connect помещается после остальных оберток
+)(UsersContainer) //as React.ComponentType можно так типизировать //для TS, connect помещается после остальных оберток

@@ -1,14 +1,14 @@
 import { Preloader } from "../common/Preloader";
 import s from "../Profile/Person/Person.module.css";
-import { UserProfileType } from "./ProfileContainer";
+import ProfileStatus from "./ProfileStatus";
 
-export type ProfileInfoPropsType = {
-  profile: UserProfileType
- 
+
+type ProfileInfoPropsType = {
+  profile: any;
 };
-export const ProfileInfo = (props: ProfileInfoPropsType ) => {
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
   if (!props.profile) {
-    return <Preloader />;
+    return <Preloader />
   }
 
   return (
@@ -21,8 +21,8 @@ export const ProfileInfo = (props: ProfileInfoPropsType ) => {
         <div className={s.description}>
           <span>{props.profile.fullName}</span>
           <span>{props.profile.aboutMe}l</span>
-          
           <span>Ищу работу: {props.profile.lookingForAJobDescription}</span>
+          <ProfileStatus status={"Hello"} />
         </div>
       </div>
     </div>
