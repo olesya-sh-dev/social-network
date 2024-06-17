@@ -6,7 +6,7 @@ import { AppStateType } from "./components/redux/redux-store";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import { LoginPage } from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { Person } from "./components/Profile/Person/Person";
 
@@ -22,7 +22,7 @@ function App({ state }: { state: AppStateType }) {
           <Route path="/profile/:userId?" element={<ProfileContainer />} />
           <Route path="/dialogs" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>
