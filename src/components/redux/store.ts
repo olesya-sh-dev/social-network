@@ -38,7 +38,7 @@ type SidebarPropsType = {
 type StateType = {
   profilePage: {
     posts: PostPropsType[];
-    newPostText: string;
+    //newPostText: string;
   };
   dialogsPage: {
     dialogs: DialogItemPropsType[];
@@ -57,7 +57,7 @@ const store = {
         { id: "1", message: "Hi, how are you", likesCount: 15 },
         { id: "2", message: "It's my first post", likesCount: 20 },
       ],
-      newPostText: "+++",
+      //newPostText: "+++",
     },
     dialogsPage: {
       dialogs: [
@@ -99,7 +99,7 @@ const store = {
         { id: "4", message: "Yo" },
         { id: "5", message: "Yo" },
       ],
-      newMessageBody: "+++",
+      //newMessageBody: "+++",
     },
     sidebar: {
       friends: [
@@ -135,7 +135,7 @@ const store = {
   dispatch(action: any) {
 
    //this._state.profilePage = profileReducer(this._state.profilePage, action);
-    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    //this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
     this._state.sidebar = sidebarReducer(this._state.sidebar, action);
     this._callSubscriber();
 

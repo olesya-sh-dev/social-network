@@ -12,14 +12,19 @@ export type MessagePropsType = {
 export type DialogsPropsType = {
   dialogs: DialogItemPropsType[];
   messages: MessagePropsType[];
-  newMessageBody: string;
+  //newMessageBody: string;
 };
-export type AddMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>;
-export type UpdateNewMessageTextActionCreatorType = ReturnType<typeof updateNewMessageTextActionCreator>;
+export type AddMessageActionCreatorType = ReturnType<
+  typeof addMessageActionCreator
+>;
+// export type UpdateNewMessageTextActionCreatorType = ReturnType<
+//   typeof updateNewMessageTextActionCreator
+// >;
 
-export type ActionsDialogsType = AddMessageActionCreatorType
-  | UpdateNewMessageTextActionCreatorType
- 
+export type ActionsDialogsType =
+  | AddMessageActionCreatorType
+  //| UpdateNewMessageTextActionCreatorType;
+
 let initialState = {
   dialogs: [
     {
@@ -60,7 +65,7 @@ let initialState = {
     { id: "4", message: "Yo" },
     { id: "5", message: "Yo" },
   ],
-  newMessageBody: "type a message here...",
+  //newMessageBody: "type a message here...",
 };
 export const dialogsReducer = (
   state: DialogsPropsType = initialState,
@@ -75,10 +80,13 @@ export const dialogsReducer = (
       return {
         ...state,
         messages: [...state.messages, newMessageItem],
-        newMessageBody: "type",
+        //newMessageBody: "type",
       };
-    case "UPDATE-NEW-MESSAGE-TEXT":
-      return { ...state, newMessageBody: action.text };
+    // case "UPDATE-NEW-MESSAGE-TEXT":
+    //   return {
+    //     ...state,
+    //     newMessageBody: action.text
+    //   };
     default:
       return state;
   }
@@ -88,11 +96,12 @@ export const addMessageActionCreator = (newMessageBody: string) => {
   return {
     type: "ADD-MESSAGE",
     newMessageBody,
-  } as const
+  } as const;
 };
-export const updateNewMessageTextActionCreator = (text: string) => {
-  return {
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    text
-  } as const
-};
+//неактуально с Redux-Form
+// export const updateNewMessageTextActionCreator = (text: string) => {
+//   return {
+//     type: "UPDATE-NEW-MESSAGE-TEXT",
+//     text
+//   } as const;
+// };

@@ -2,8 +2,9 @@ import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogMapPropsType } from "./DialogsContainer";
-import { AddNewMessage } from "../AddNewMessage";
-import { Navigate} from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { Button } from "../Button";
+
 
 
 export const Dialogs = (props:DialogMapPropsType) => {
@@ -14,6 +15,8 @@ export const Dialogs = (props:DialogMapPropsType) => {
     <Message key={index} message={el.message} id={el.id} />
   ));
  
+  let addMessage = (values:any) => {props.addNewMessage(values.newMessageBody)}
+  
   //if (!props.isAuth) return <Navigate to="/login" />
   return (
     <div className={s.dialogs}>
@@ -21,8 +24,24 @@ export const Dialogs = (props:DialogMapPropsType) => {
       <div className={s.messages}>
         {messagesElements}
           {/* <AddNewMessageContainer className="s.newMessage" /> */}
-      <AddNewMessage className={s.newMessage} addNewMessage={props.addNewMessage} updateNewMessageText={props.updateNewMessageText} newMessageBody={props.newMessageBody}/>
+      {/* <AddNewMessage className={s.newMessage} addNewMessage={props.addNewMessage} updateNewMessageText={props.updateNewMessageText} newMessageBody={props.newMessageBody}/> */}
+<AddNewMessageFormRedux onSubmit={addMessage}/>
       </div>
     </div>
   );
 };
+
+const AddNewMessageForm = (props: any) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+      <Field placeholder="Enter your message" name="newMessageBody" component="input" />
+      </div>
+      
+   
+      <div><Button onClick={props.handleSubmit}>Send</Button></div>
+    </form>
+  );
+}
+
+const AddNewMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddNewMessageForm)
