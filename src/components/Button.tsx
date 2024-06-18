@@ -1,7 +1,7 @@
 import React from "react"
 
-type ButtonPropsType = {
-    onClick: () => void
+export type ButtonPropsType = {
+    onClick: any
     disabled?: boolean
     children: React.ReactNode
 }

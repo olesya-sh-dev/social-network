@@ -2,10 +2,13 @@ import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem";
 import { Message } from "./Message";
 import { DialogMapPropsType } from "./DialogsContainer";
-import { Field, reduxForm } from "redux-form";
-import { Button } from "../Button";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Button, ButtonPropsType } from "../Button";
 
 
+type FormDataType = {
+  newMessageBody: string
+}
 
 export const Dialogs = (props:DialogMapPropsType) => {
   let dialogsElements = props.dialogs.map((el, index) => (
@@ -31,7 +34,7 @@ export const Dialogs = (props:DialogMapPropsType) => {
   );
 };
 
-const AddNewMessageForm = (props: any) => {
+const AddNewMessageForm:React.FC<InjectedFormProps<FormDataType& ButtonPropsType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -44,4 +47,4 @@ const AddNewMessageForm = (props: any) => {
   );
 }
 
-const AddNewMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddNewMessageForm)
+const AddNewMessageFormRedux = reduxForm<FormDataType & ButtonPropsType>({form: "dialogAddMessageForm"})(AddNewMessageForm)

@@ -1,9 +1,12 @@
 import { Post } from "./Post/Post";
 import s from "./../../Profile/Profile.module.css";
 import { MyPostsMapPropsType } from "./MyPostsContainer";
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { ButtonPropsType } from "../../Button";
 
-
+type FormDataType = {
+  newPostText: string
+}
 
 export const MyPosts = (props: MyPostsMapPropsType) => {
 
@@ -24,7 +27,7 @@ let onAddPost = (values: any) => {
 };
 
 
-let AddNewPostForm = (props: any) => {
+let AddNewPostForm:React.FC<InjectedFormProps<FormDataType& ButtonPropsType>>= (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -41,4 +44,4 @@ let AddNewPostForm = (props: any) => {
   );
 };
 
-const AddNewPostFormRedux = reduxForm({ form: "ProfileAddNewPostForm" })(AddNewPostForm);
+const AddNewPostFormRedux = reduxForm<FormDataType& ButtonPropsType>({ form: "ProfileAddNewPostForm" })(AddNewPostForm);
