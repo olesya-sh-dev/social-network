@@ -54,7 +54,7 @@ export type UserProfileType = {
   photos: PhotoType;
 };
 
-function withRouter(Component: any) {
+export function withRouter(Component: any) {
   function ComponentWithRouterProp(props: any) {
     let location = useLocation();
     let navigate = useNavigate();
@@ -68,6 +68,15 @@ function withRouter(Component: any) {
 class ProfileContainer extends React.Component<PropsType> {
   
   componentDidMount() {
+    //TODO redirect to login if not authorized
+// let userId = this.props.router.params
+//     if (!userId) {
+//       userId = this.props.authorizedUserId
+//       if (!userId) {
+//         //         this.props.history.push("/login");
+//       }
+//     }
+
     type UserIdType = string | undefined;
     let userId: UserIdType = "31073";
 

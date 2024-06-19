@@ -8,9 +8,27 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import React from "react";
+import { connect } from "react-redux";
 
+import { initializeApp } from "./components/redux/app-reducer";
+import { Preloader } from "./components/common/Preloader";
 
-function App({ state }: { state: AppStateType }) {
+type AppProps = { 
+  state: AppStateType
+  initializeApp: () => void,
+  initialized: boolean
+  //getAuthUserDataThunkCreator: any
+
+}
+class App extends React.Component <AppProps > {
+  componentDidMount() {
+    this.props.initializeApp();
+}
+  render() {
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
   return (
     <div className="app-wrapper">
       <HeaderContainer />
@@ -28,5 +46,9 @@ function App({ state }: { state: AppStateType }) {
     </div>
   );
 }
+}
+const mapStateToProps = (state: AppStateType) => ({
+  initialized: state.app.initialized
+});
 
-export default App;
+export default connect (mapStateToProps, { initializeApp })(App);

@@ -90,7 +90,7 @@ const mapStateToProps = (state: AppStateType) => {
 // })(UsersRedirectComponent);
 
 export default compose<React.ComponentType>(
-  withAuthRedirect,
+  //withAuthRedirect,
   connect(mapStateToProps, {
     setCurrentPage,
     toggleIsFollowingProgress,
