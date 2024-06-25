@@ -5,13 +5,15 @@ import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { ButtonPropsType } from "../../Button";
 import { maxLengthCreator, required } from "../../../utils/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
+import React from "react";
 
 
 type FormDataType = {
   newPostText: string;
 };
 
-export const MyPosts = (props: MyPostsMapPropsType) => {
+export const MyPosts = React.memo((props: MyPostsMapPropsType) => {
+  
   let postsElements = props.posts.map((p, index) => (
     <Post key={index} id={p.id} message={p.message} likesCount={p.likesCount} />
   ));
@@ -26,7 +28,7 @@ export const MyPosts = (props: MyPostsMapPropsType) => {
       <div className={s.posts}>{postsElements}</div>
     </div>
   );
-};
+});
 
 const maxLength10 = maxLengthCreator(10);
 

@@ -1,6 +1,7 @@
 import React from "react";
 
 class ProfileStatus extends React.Component<any, any> {
+
   state = {
     editMode: false,
     status: this.props.status,
@@ -30,6 +31,9 @@ class ProfileStatus extends React.Component<any, any> {
     }
     
     console.log("componentDidUpdate");
+  }
+  shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): boolean {
+    return nextProps.status !== this.props.status || nextState.status !== this.state.status 
   }
   render() {
     console.log("render");
