@@ -7,6 +7,7 @@ import { loginThunkCreator } from "../redux/auth-reducer";
 import { Navigate } from "react-router-dom";
 import { AppStateType } from "../redux/redux-store";
 import style from "../common/FormsControls/FormsControls.module.css";
+import { createField } from "../common/FormsControls/FormsControls";
 
 type FormDataType = {
   email: string;
@@ -17,32 +18,22 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   console.log("rerender");
   return (
     <form onSubmit={props.handleSubmit}>
-      <div>
-        <Field
-          placeholder="email"
-          name="email"
-          validate={[required]}
-          component={Input}
-          type="email"
-        />
-      </div>
-      <div>
-        <Field
-          placeholder="password"
-          name="password"
-          validate={[required]}
-          component={Input}
-          type="password"
-        />
-      </div>
-      <div>
-        <Field type="checkbox" name="rememberMe" component={Input} />
-        remember me
-      </div>
-      {props.error && <div className={style.formSummaryError}>
-        {props.error}
-        </div>
-      }
+      {createField("Email", "email", [required], Input)}
+      {createField("Password", "password", [required], Input, {
+        type: "password",
+      })}
+      {createField(
+        "",
+        "rememberMe",
+        [],
+        Input,
+        { type: "checkbox" },
+        "remember me"
+      )}
+      <div></div>
+      {props.error && (
+        <div className={style.formSummaryError}>{props.error}</div>
+      )}
       <div>
         <button>login</button>
       </div>

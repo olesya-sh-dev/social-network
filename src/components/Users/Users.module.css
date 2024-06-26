@@ -1,15 +1,3 @@
-.pages {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        flex-wrap: wrap;
-        color: rgb(14, 14, 195);
-    }
-.selectedPage {
-    color: rgb(251, 63, 92);
-    font-weight: bold;
-}
 .userBlock{
     display: flex;
     justify-content: flex-start;

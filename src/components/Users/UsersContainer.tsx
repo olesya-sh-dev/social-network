@@ -2,8 +2,7 @@ import { Users } from "./Users";
 import { connect } from "react-redux";
 import {
   UserType,
-  follow,
-  unfollow,
+  
   setCurrentPage,
   toggleIsFollowingProgress,
   getUsersThunkCreator,
@@ -14,7 +13,7 @@ import { AppStateType } from "../redux/redux-store";
 
 import React from "react";
 import { Preloader } from "../common/Preloader";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+
 import { compose } from "redux";
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../redux/users-selectors";
 
@@ -69,16 +68,7 @@ type MapDispatchPropsType = {
   unfollowThunkCreator: (userId: number) => void;
 };
 export type UsersMapPropsType = MapStatePropsType & MapDispatchPropsType;
-// const mapStateToProps = (state: AppStateType) => {
-//   return {
-//     users: state.usersPage.users,
-//     pageSize: state.usersPage.pageSize,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     currentPage: state.usersPage.currentPage,
-//     isFetching: state.usersPage.isFetching,
-//     followingInProgress: state.usersPage.followingInProgress,
-//   };
-// };
+
 const mapStateToProps = (state: AppStateType) => {
   return {
     users: getUsers(state),

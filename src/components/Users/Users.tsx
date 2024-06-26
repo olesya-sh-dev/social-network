@@ -1,7 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { Button } from "../Button";
 import { UserType } from "../redux/users-reducer";
-import s from "./Users.module.css";
+import { Paginator } from "../common/Paginator/Paginator";
+import { User } from "./User";
 
 export const Users = (props: {
   totalUsersCount: number;
@@ -13,76 +12,28 @@ export const Users = (props: {
   followThunkCreator: (userId: number) => void;
   unfollowThunkCreator: (userId: number) => void;
 }) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
   return (
     <>
-      <div className={s.pages}>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p ? s.selectedPage : ""}
-              onClick={(e) => {
-                props.onPageChanged(p);
-              }}
-              key={p}
-            >
-              {p}
-            </span>
-          );
-        })}
-      </div>
-      {props.users.map((u, index) => (
-        <div className={s.userBlock} key={index}>
-          <div className={s.colomnInfo}>
-            <NavLink to={"/profile/" + u.id}>
-              <img
-                className={s.userImg}
-                src={
-                  u.photos.small
-                    ? u.photos.small
-                    : "https://img.freepik.com/free-psd/3d-render-cat-emoji_23-2150311907.jpg?w=826&t=st=1716839538~exp=1716840138~hmac=9613992c138d69655f2378a3d65428a9cc6141be5eccdb37d61a5cd1f6cb4b54"
-                }
-                alt="img"
-              />
-            </NavLink>
+      <Paginator
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}
+      />
 
-            {u.followed ? (
-              <Button
-                disabled={props.followingInProgress.some((id) => id === u.id)}
-                onClick={() => {
-                  props.unfollowThunkCreator(u.id);
-                }}
-              >
-                Unfollow
-              </Button>
-            ) : (
-              <Button
-                disabled={props.followingInProgress.some((id) => id === u.id)}
-                onClick={() => {
-                  props.followThunkCreator(u.id);
-                }}
-              >
-                Follow
-              </Button>
-            )}
-          </div>
+      {props.users.map((u, index) => <User
+        user={u}
+        index={index}
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        users={props.users}
+        onPageChanged={props.onPageChanged}
+        followingInProgress={props.followingInProgress}
+        followThunkCreator={props.followThunkCreator}
+        unfollowThunkCreator={props.unfollowThunkCreator}
+      />)}
 
-          <div className={s.userInfo}>
-            <div className={s.colomnInfo}>
-              <div>{u.name}</div>
-              <span>{u.status}</span>
-            </div>
-            <div className={s.colomnInfo}>
-              <span>{"u.location.city"}</span>
-              <span>{"u.location.country"}</span>
-            </div>
-          </div>
-        </div>
-      ))}
     </>
   );
-};
+}
