@@ -15,10 +15,11 @@ export const Users = (props: {
   return (
     <>
       <Paginator
-        totalUsersCount={props.totalUsersCount}
+        totalItemsCount={props.totalUsersCount}
         pageSize={props.pageSize}
         currentPage={props.currentPage}
         onPageChanged={props.onPageChanged}
+        portionSize={25}
       />
 
       {props.users.map((u, index) => <User
