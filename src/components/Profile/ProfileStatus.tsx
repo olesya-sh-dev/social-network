@@ -29,14 +29,13 @@ class ProfileStatus extends React.Component<any, any> {
         status: this.props.status
       })
     }
-    
-    console.log("componentDidUpdate");
+
   }
   shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): boolean {
     return nextProps.status !== this.props.status || nextState.status !== this.state.status 
   }
   render() {
-    console.log("render");
+  
     return (
       <>
         <div>
