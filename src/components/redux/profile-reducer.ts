@@ -21,13 +21,15 @@ type DeletePostActionType = ReturnType<typeof deletePostActionCreator>;
 //type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>;
 type SetUserProfileActionType = ReturnType<typeof setUserProfile>;
 type SetStatusActionType = ReturnType<typeof setStatus>;
+type SavePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>;
 
 export type ActionsProfileType =
   | AddPostActionType
   //| UpdateNewPostTextActionType
   | DeletePostActionType
   | SetUserProfileActionType
-  | SetStatusActionType;
+  | SetStatusActionType
+  | SavePhotoSuccessActionType;
 
 let initialState = {
   posts: [
@@ -77,6 +79,11 @@ export const profileReducer = (
         ...state,
         profile: action.profile,
       };
+    case "SAVE-PHOTO":
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos } as UserProfileType,
+      };
     default:
       return state;
   }
@@ -113,6 +120,12 @@ export const deletePostActionCreator = (postId: string) => {
     postId,
   } as const;
 };
+export const savePhotoSuccess = (photos: PhotoType) => {
+  return {
+    type: "SAVE-PHOTO",
+    photos,
+  } as const;
+};
 export const getUserProfileThunkCreator =
   (userId: number) => async (dispatch: Dispatch) => {
     let response = await usersAPI.getProfile(Number(userId));
@@ -127,5 +140,12 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
   let response = await profileAPI.updateStatus(status);
   if (response.data.resultCode === 0) {
     dispatch(setStatus(status));
+  }
+};
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+  let response = await profileAPI.savePhoto(file);
+  if (response.data.resultCode === 0) {
+    dispatch(savePhotoSuccess(response.data.data.photos));
   }
 };

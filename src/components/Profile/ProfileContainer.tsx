@@ -6,16 +6,27 @@ import {
   useNavigate,
 } from "react-router-dom";
 import React from "react";
-import { getStatus, getUserProfileThunkCreator, updateStatus } from "../redux/profile-reducer";
+import { getStatus, getUserProfileThunkCreator, savePhoto, updateStatus } from "../redux/profile-reducer";
 import { AppStateType } from "../redux/redux-store";
 import { compose } from "redux";
 
+type RouterParams = {
+  userId?: string;
+};
+
 type RouterType = {
-  userId: string | undefined;
   location: ReturnType<typeof useLocation>;
   navigate: ReturnType<typeof useNavigate>;
-  params: ReturnType<typeof useParams>;
+  params: RouterParams;
 };
+
+
+// type RouterType = {
+//   userId: string | undefined;
+//   location: ReturnType<typeof useLocation>;
+//   navigate: ReturnType<typeof useNavigate>;
+//   params: ReturnType<typeof useParams>;
+// };
 
 type PropsType = {
   getUserProfileThunkCreator: (userId: number) => void;
@@ -25,6 +36,8 @@ type PropsType = {
   getStatus: (userId: number) => void;
   status: string;
   updateStatus: (status: string) => void;
+  savePhoto: (file: any) => void;
+  //isOwner: boolean
 
 };
 
@@ -54,29 +67,21 @@ export type UserProfileType = {
   photos: PhotoType;
 };
 
-export function withRouter(Component: any) {
-  function ComponentWithRouterProp(props: any) {
+export function withRouter<T>(Component: React.ComponentType<T>){
+  function ComponentWithRouterProp(props: T) {
     let location = useLocation();
     let navigate = useNavigate();
     let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
+    return <Component {...props as T} router={{ location, navigate, params }} />;
   }
 
   return ComponentWithRouterProp;
 }
 
+
 class ProfileContainer extends React.Component<PropsType> {
   
-  componentDidMount() {
-    //TODO redirect to login if not authorized
-// let userId = this.props.router.params
-//     if (!userId) {
-//       userId = this.props.authorizedUserId
-//       if (!userId) {
-//         //         this.props.history.push("/login");
-//       }
-//     }
-
+  refreshProfile() {
     type UserIdType = string | undefined;
     let userId: UserIdType = "31073";
 
@@ -92,10 +97,47 @@ class ProfileContainer extends React.Component<PropsType> {
    
     this.props.getStatus(Number(userId))
     }
+  componentDidMount() {
+    //TODO redirect to login if not authorized
+// let userId = this.props.router.params
+//     if (!userId) {
+//       userId = this.props.authorizedUserId
+//       if (!userId) {
+//         //         this.props.history.push("/login");
+//       }
+//     }
+
+    // type UserIdType = string | undefined;
+    // let userId: UserIdType = "31073";
+
+    // if (
+    //   typeof this.props.router.params !== "string" &&
+    //   "userId" in this.props.router.params
+    // ) {
+    //   userId = this.props.router.params.userId;
+    //   this.props.getUserProfileThunkCreator(Number(userId));
+    // } else {
+    //   this.props.getUserProfileThunkCreator(Number(userId));
+    // }
+   
+    // this.props.getStatus(Number(userId))
+    // }
+this.refreshProfile()
+  }
+
+  //TODO не работает
+   componentDidUpdate(prevProps: any, prevState: any, snapshot?: any): void {
+    if (this.props.router.params.userId !== prevProps.router.params.userId) {
+    this.refreshProfile()
+   }
+  }
 
   render() {
     return (
-      <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
+      <Profile {...this.props}
+      isOwner={!this.props.router.params.userId}
+      profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} 
+      savePhoto={this.props.savePhoto}/>
     ) 
   }
 }
@@ -127,5 +169,5 @@ let mapStateToProps = (state: AppStateType) => ({
 export default compose<React.ComponentType>(
   withRouter,
   //withAuthRedirect,
-  connect(mapStateToProps, { getUserProfileThunkCreator, getStatus, updateStatus }),
+  connect(mapStateToProps, { getUserProfileThunkCreator, getStatus, updateStatus, savePhoto }),
 )(ProfileContainer);
