@@ -1,6 +1,12 @@
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import { AppStateType, store } from "./components/redux/redux-store";
 import UsersContainer from "./components/Users/UsersContainer";
 
@@ -14,8 +20,12 @@ import { initializeApp } from "./components/redux/app-reducer";
 import { Preloader } from "./components/common/Preloader";
 import { withSuspense } from "./hoc/withSuspense";
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(()=>import('./components/Profile/ProfileContainer'))
+const DialogsContainer = React.lazy(
+  () => import("./components/Dialogs/DialogsContainer")
+);
+const ProfileContainer = React.lazy(
+  () => import("./components/Profile/ProfileContainer")
+);
 const SuspendedProfileContainer = withSuspense(ProfileContainer);
 const SuspendedDialogsContainer = withSuspense(DialogsContainer);
 type AppProps = {
@@ -40,8 +50,11 @@ class App extends React.Component<AppProps> {
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
             {/* <Route path="/profile" element={<Person/>} /> */}
-            <Route path="/profile/:userId?" element={<SuspendedProfileContainer/>}/>
-            <Route path="/dialogs" element={<SuspendedDialogsContainer/>} />
+            <Route
+              path="/profile/:userId?"
+              element={<SuspendedProfileContainer />}
+            />
+            <Route path="/dialogs" element={<SuspendedDialogsContainer />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/login" element={<Login />} />
           </Routes>
@@ -58,11 +71,12 @@ const AppContainer = connect(mapStateToProps, { initializeApp })(App);
 
 const SamuraiJSApp = (props: any) => {
   return (
-    <BrowserRouter>
+    //<BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 export default SamuraiJSApp;
