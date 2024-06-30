@@ -6,7 +6,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import React from "react";
-import { getStatus, getUserProfileThunkCreator, savePhoto, updateStatus } from "../redux/profile-reducer";
+import { getStatus, getUserProfileThunkCreator, savePhoto, saveProfile, updateStatus } from "../redux/profile-reducer";
 import { AppStateType } from "../redux/redux-store";
 import { compose } from "redux";
 
@@ -37,6 +37,7 @@ type PropsType = {
   status: string;
   updateStatus: (status: string) => void;
   savePhoto: (file: any) => void;
+  saveProfile: (formData: any) =>Promise<any>;
   //isOwner: boolean
 
 };
@@ -137,7 +138,7 @@ this.refreshProfile()
       <Profile {...this.props}
       isOwner={!this.props.router.params.userId}
       profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} 
-      savePhoto={this.props.savePhoto}/>
+      savePhoto={this.props.savePhoto} saveProfile={this.props.saveProfile}/>
     ) 
   }
 }
@@ -169,5 +170,5 @@ let mapStateToProps = (state: AppStateType) => ({
 export default compose<React.ComponentType>(
   withRouter,
   //withAuthRedirect,
-  connect(mapStateToProps, { getUserProfileThunkCreator, getStatus, updateStatus, savePhoto }),
+  connect(mapStateToProps, { getUserProfileThunkCreator, getStatus, updateStatus, savePhoto, saveProfile }),
 )(ProfileContainer);

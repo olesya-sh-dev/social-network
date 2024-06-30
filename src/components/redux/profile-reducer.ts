@@ -1,11 +1,14 @@
-import { Dispatch } from "redux";
+
 import { v1 } from "uuid";
 import { profileAPI, usersAPI } from "../../api/api";
 import {
-  ContactType,
   PhotoType,
   UserProfileType,
 } from "../Profile/ProfileContainer";
+import { AnyAction, Dispatch } from "redux";
+import { AppStateType } from "./redux-store";
+import { ThunkAction } from "redux-thunk";
+import { stopSubmit } from "redux-form";
 
 // const ADD_POST = "ADD-POST";
 //const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -25,18 +28,17 @@ type SavePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>;
 
 export type ActionsProfileType =
   | AddPostActionType
-  //| UpdateNewPostTextActionType
   | DeletePostActionType
   | SetUserProfileActionType
   | SetStatusActionType
-  | SavePhotoSuccessActionType;
+  | SavePhotoSuccessActionType
+  
 
 let initialState = {
   posts: [
     { id: "1", message: "Hi, how are you", likesCount: 15 },
     { id: "2", message: "It's my first post", likesCount: 20 },
   ] as Array<PostPropsType>,
-  //newPostText: "type here...",
   //TODO null протипизировать
   profile: null as UserProfileType | null,
   status: "",
@@ -56,14 +58,9 @@ export const profileReducer = (
       return {
         ...state,
         posts: [...state.posts, newPost],
-        //newPostText: "type here...",
+     
       };
-    // case "UPDATE-NEW-POST-TEXT":
-    //   console.log("textarea");
-    //   return {
-    //     ...state,
-    //     newPostText: action.text,
-    //   };
+  
     case "DELETE-POST":
       return {
         ...state,
@@ -95,12 +92,7 @@ export const addPostActionCreator = (newPostText: any) => {
     newPostText,
   } as const;
 };
-// export const updateNewPostTextActionCreator = (text: string) => {
-//   return {
-//     type: "UPDATE-NEW-POST-TEXT",
-//     text,
-//   } as const
-// };
+
 export const setUserProfile = (profile: UserProfileType) => {
   return {
     type: "SET-USER-PROFILE",
@@ -149,3 +141,23 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     dispatch(savePhotoSuccess(response.data.data.photos));
   }
 };
+
+export const saveProfile = (profile: UserProfileType): ThunkAction<void, AppStateType, unknown, AnyAction> => 
+  async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+
+    if (userId !== null) {
+      const response = await profileAPI.saveProfile(profile);
+      if (response.data.resultCode === 0) {
+        dispatch(getUserProfileThunkCreator(userId));
+      } else {
+        const errorMessage = response.data.messages[0];
+        alert(`Error: ${errorMessage}`);
+    
+        dispatch(stopSubmit("edit-profile", {_error: errorMessage}));
+        return Promise.reject(errorMessage);
+      }
+    }
+  };
+
+

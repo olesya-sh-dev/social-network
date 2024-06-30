@@ -3,17 +3,18 @@ import s from "./../../Profile/Profile.module.css";
 import { MyPostsMapPropsType } from "./MyPostsContainer";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { ButtonPropsType } from "../../Button";
-import { maxLengthCreator, required } from "../../../utils/validators";
+import {
+  maxLengthCreator,
+  required,
+} from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 import React from "react";
-
 
 type FormDataType = {
   newPostText: string;
 };
 
 export const MyPosts = React.memo((props: MyPostsMapPropsType) => {
-  
   let postsElements = props.posts.map((p, index) => (
     <Post key={index} id={p.id} message={p.message} likesCount={p.likesCount} />
   ));

@@ -5,7 +5,7 @@ import { DialogMapPropsType } from "./DialogsContainer";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Button, ButtonPropsType } from "../Button";
 import { Textarea } from "../common/FormsControls/FormsControls";
-import { maxLengthCreator, required } from "../../utils/validators";
+import { maxLengthCreator, required } from "../../utils/validators/validators";
 
 type FormDataType = {
   newMessageBody: string;

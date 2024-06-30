@@ -10,6 +10,7 @@ export type ProfilePropsType = {
   updateStatus: (status: string) => void;
   isOwner: boolean;
   savePhoto: (file: any) => void;
+  saveProfile: (formData: any) => Promise<any>;
 };
 export const Profile = (props: ProfilePropsType) => {
   return (
@@ -22,6 +23,7 @@ export const Profile = (props: ProfilePropsType) => {
         status={props.status}
         updateStatus={props.updateStatus}
         savePhoto={props.savePhoto}
+        saveProfile={props.saveProfile}
       />
       <MyPostsContainer />
     </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Input } from "../common/FormsControls/FormsControls";
-import { required } from "../../utils/validators";
+import { required } from "../../utils/validators/validators";
 import { connect } from "react-redux";
 import { loginThunkCreator } from "../redux/auth-reducer";
 import { Navigate } from "react-router-dom";
@@ -15,7 +15,7 @@ type FormDataType = {
   rememberMe: boolean;
 };
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-  console.log("rerender");
+
   return (
     <form onSubmit={props.handleSubmit}>
       {createField("Email", "email", [required], Input)}
